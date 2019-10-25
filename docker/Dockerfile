@@ -10,8 +10,20 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 # Install basic packages
-RUN apk --update --no-cache add bash py3-numpy chromium x11vnc novnc@edge xvfb openbox supervisor sudo xfce4-terminal wget ca-certificates && \
-    update-ca-certificates
+RUN apk --update --no-cache add bash \
+    py3-numpy \
+    chromium \
+    x11vnc \
+    novnc@edge \
+    xvfb \
+    openbox \
+    supervisor \
+    sudo \
+    xfce4-terminal \
+    wget \
+    ca-certificates \
+    nodejs \
+    && update-ca-certificates
 # Fix novnc index.html
 RUN ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html
 
@@ -29,7 +41,7 @@ ENV TERM=xterm \
 RUN addgroup headless && adduser -G headless -s /bin/sh -D headless
 
 # Add supervisord
-COPY supervisord.conf /etc/supervisord.conf
+COPY docker/supervisord.conf /etc/supervisord.conf
 USER headless
 
 # Entrypoint

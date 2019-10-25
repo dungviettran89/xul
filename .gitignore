@@ -1,3 +1,4 @@
 .idea/
 *.iml
 *.ipr
+node_modules/
