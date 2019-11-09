@@ -24,6 +24,9 @@ RUN git clone --depth 1 https://github.com/novnc/noVNC.git novnc && \
     cd novnc &&\
     cp vnc_lite.html index.html &&\
     sed -e 's/id="top_bar"/id="top_bar" style="display:none;"/g' -i index.html
-ADD docker/entrypoint.sh /vnc/entrypoint.sh
+WORKDIR /app/
+ADD docker/entrypoint.sh /app/entrypoint.sh
+ADD packages/grid-server /app/grid-server
+RUN cd grid-server && npm install
 ENTRYPOINT ["dumb-init","--"]
 CMD ["./entrypoint.sh"]
