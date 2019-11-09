@@ -1,5 +1,5 @@
 import globs from "globs";
-import {gridServer} from "./core/GridServer";
+import {gridServer} from "./core/mvc/GridServer";
 
 globs(`${__dirname}/server/**/*.ts`, (err, files) => {
     files.forEach((f) => {
