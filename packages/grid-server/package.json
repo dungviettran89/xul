@@ -1,0 +1,44 @@
+{
+  "name": "grid-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf build",
+    "prettier": "prettier --write src/**/*.ts",
+    "tslint": "tslint --fix --project ./tsconfig.json 'src/**/*.{ts,tsx}'",
+    "prebuild": "npm run clean && npm run prettier && npm run tslint",
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "echo nothing to do yet",
+    "prestart": "npm run prettier && npm run tslint",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "globs": "^0.1.4",
+    "http-proxy-middleware": "^0.20.0",
+    "lodash-es": "^4.17.15",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.7.2",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/glob": "^7.1.1",
+    "@types/node": "^12.12.7",
+    "husky": "^3.0.9",
+    "prettier": "^1.19.0",
+    "rimraf": "^3.0.0",
+    "tslint": "^5.20.1",
+    "tslint-sonarts": "^1.9.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  }
+}
