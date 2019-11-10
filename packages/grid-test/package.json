@@ -21,16 +21,10 @@
   },
   "devDependencies": {
     "@types/node": "^12.12.7",
-    "husky": "^3.0.9",
     "prettier": "^1.19.0",
     "rimraf": "^3.0.0",
     "tslint": "^5.20.1",
     "tslint-sonarts": "^1.9.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run pre-commit"
-    }
   },
   "prettier": {
     "printWidth": 160
