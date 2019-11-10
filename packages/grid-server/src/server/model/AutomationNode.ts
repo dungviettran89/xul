@@ -1,6 +1,8 @@
 import {entity} from "../../core/persistence/GridPersistenceManager";
 import {id} from "../../core/persistence/GridPersistenceManager";
 
+export type NodeStatus = "initializing" | "ready" | "busy";
+
 @entity({
     table: "automation_node",
     schema: `
@@ -17,6 +19,7 @@ export class AutomationNode {
     @id()
     public id: string;
     public friendlyName: string;
-    public status: string;
+    public status: NodeStatus;
     public address: string;
+    public updated:number;
 }

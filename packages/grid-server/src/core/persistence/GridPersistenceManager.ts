@@ -1,6 +1,6 @@
 import {lowerCase} from 'lodash';
 import {singleton} from "../context/GridContext";
-import mariadb, {Pool} from "mariadb";
+import mariadb, {Pool, UpsertResult} from "mariadb";
 import {onStart} from "../mvc/InitializingBean";
 import {logger} from "../GridLogger";
 
@@ -29,8 +29,43 @@ export class GridPersistenceManager {
         }
     }
 
+    public async save<T>(entity: T): Promise<number> {
+        return this.saveAll([entity]);
+    }
+
+    public async saveAll<T>(entities: T[]): Promise<number> {
+        let i: number = 0;
+        let parameters: any = {};
+        let sql = entities.map((e: any) => {
+            let fields: string = Object.keys(e).join(',');
+            let inserts: string = Object.keys(e).map(k => {
+                let parameterName = `p${i++}`;
+                parameters[parameterName] = e[k];
+                return `:${parameterName}`;
+            }).join(',');
+            let updates: string = Object.keys(e).map(k => {
+                let parameterName = `p${i++}`;
+                parameters[parameterName] = e[k];
+                return `${k}=:${parameterName}`;
+            }).join(',');
+            return `INSERT INTO ${entityTables.get(e.constructor)} (${fields}) VALUES (${inserts}) ON DUPLICATE KEY UPDATE ${updates};`;
+        }).join('\n');
+        logger.debug(`GridPersistenceManager.saveAll() sql=${sql}`);
+        logger.debug(`GridPersistenceManager.saveAll() parameters=${JSON.stringify(parameters)}`);
+        let result: UpsertResult[] = await this.pool.batch({sql, namedPlaceholders: true}, parameters);
+        logger.debug(`GridPersistenceManager.saveAll() result=${JSON.stringify(result)}`);
+        if (!Array.isArray(result)) result = [(result as UpsertResult)];
+        return result.map(r => r.affectedRows).reduce((a, b) => a + b, 0);
+    }
+
+    public async findBy<T>(clazz: { new(): T; }, where: string, ...args: any[]): Promise<T[]> {
+        let result: T[] = await this.pool.query(`select * from ${entityTables.get(clazz)} where ${where}`, args);
+        return result.map(t => Object.assign(new clazz(), t));
+    }
+
     public async findAll<T>(clazz: { new(): T; }): Promise<T[]> {
-        return await this.pool.query(`select * from ${entityTables.get(clazz)}`);
+        let result: T[] = await this.pool.query(`select * from ${entityTables.get(clazz)}`);
+        return result.map(t => Object.assign(new clazz(), t));
     }
 
     public async findOne<T>(clazz: { new(): T; }, id: any): Promise<T> {
@@ -39,10 +74,10 @@ export class GridPersistenceManager {
         if (!Array.isArray(result)) {
             throw `${idColumn} is not id in entity ${clazz.name}`;
         }
-        if(result.length>0){
+        if (result.length > 1) {
             throw `More than one entity returned for ${idColumn} in entity ${clazz.name}`;
         }
-        return result.length == 1 ? result[0] : null;
+        return result.length == 1 ? Object.assign(new clazz(), result[0]) : null;
     }
 }
 
@@ -62,7 +97,7 @@ export const entity = (config: { table?: string, schema?: string }) => {
 export const entityIds: Map<any, string> = new Map();
 export const id = () => {
     return (clazz?: any, method?: any, descriptor?: any) => {
-        entityTables.set(clazz, method);
+        entityIds.set(clazz.constructor, method);
         clazz.ID = method;
         return descriptor;
     }
