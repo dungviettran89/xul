@@ -93,7 +93,8 @@ export class GridPersistenceManager {
 export const entityTables: Map<any, string> = new Map();
 export const entitySchemas: Map<any, string> = new Map();
 export const entity = (config: { table?: string; schema?: string }) => {
-  const { table, schema } = config;
+  let { table } = config;
+  const { schema } = config;
   return (clazz?: any, method?: any, descriptor?: any) => {
     table = table || lowerCase(clazz.name);
     entityTables.set(clazz, table);

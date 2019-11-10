@@ -1,0 +1,38 @@
+{
+  "name": "k8s-cucumber-grid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prettier": "prettier --write 'packages/**/*.{ts,tsx,html,css,js}'",
+    "tslint": "tslint --fix 'packages/*/src/**/*.{ts,tsx}'",
+    "pre-commit": "npm run prettier && npm run tslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dungviettran89/k8s-cucumber-grid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dungviettran89/k8s-cucumber-grid/issues"
+  },
+  "homepage": "https://github.com/dungviettran89/k8s-cucumber-grid#readme",
+  "devDependencies": {
+    "husky": "^3.0.9",
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-sonarts": "^1.9.0",
+    "typescript": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pre-commit"
+    }
+  },
+  "prettier": {
+    "printWidth": 160
+  }
+}
