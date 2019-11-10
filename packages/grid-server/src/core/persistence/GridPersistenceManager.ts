@@ -1,7 +1,7 @@
 import {lowerCase} from 'lodash';
 import {singleton} from "../context/GridContext";
 import mariadb, {Pool, UpsertResult} from "mariadb";
-import {onStart} from "../mvc/InitializingBean";
+import {postConstruct} from "../mvc/InitializingBean";
 import {logger} from "../GridLogger";
 
 @singleton()
@@ -9,16 +9,17 @@ export class GridPersistenceManager {
     private pool: Pool;
 
     constructor() {
-        this.pool = mariadb.createPool({
-            host: process.env.db_host || "localhost",
-            port: parseInt(process.env.db_port, 10) || 3306,
-            database: process.env.db_name || "automation",
-            user: process.env.db_user || "automation",
-            password: process.env.db_password || "automation"
-        });
+        const host = process.env.db_host || "localhost";
+        const port = parseInt(process.env.db_port, 10) || 3306;
+        const database = process.env.db_name || "automation";
+        const user = process.env.db_user || "automation";
+        const password = process.env.db_password || "automation";
+        logger.info(`GridPersistenceManager.constructor() url=${host}:${port}/${database}`);
+        logger.info(`GridPersistenceManager.constructor() user=${user}`);
+        this.pool = mariadb.createPool({host, port, database, user, password});
     }
 
-    @onStart(-1)
+    @postConstruct(-1)
     public async start() {
         logger.info(`GridPersistenceManager.start() `);
         if (entitySchemas) {

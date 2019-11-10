@@ -16,6 +16,7 @@ export class GridServer {
 
     constructor() {
         gridContext.singleton("application", this.application);
+        gridContext.singleton("applicationPort", this.port);
     }
 
     public async start() {

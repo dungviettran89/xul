@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS automation_node (
   friendlyName nvarchar(128) UNIQUE KEY,
   status nvarchar(128) NOT NULL,
   address nvarchar(128) NOT NULL,
+  port int NOT NULL,
   updated bigint NOT NULL 
 )   
     `
@@ -21,5 +22,6 @@ export class AutomationNode {
     public friendlyName: string;
     public status: NodeStatus;
     public address: string;
+    public port: number;
     public updated:number;
 }

@@ -16,7 +16,7 @@ export class NodeController {
 
     @requestMapping()
     public async active(request: Request, response: Response): Promise<void> {
-        response.json(await this.gridPersistenceManager.findBy(AutomationNode, ' updated > ?', Date.now() - 60 * 1000));
+        response.json(this.nodeService.active);
     }
 
     @requestMapping()
@@ -27,5 +27,10 @@ export class NodeController {
     @requestMapping()
     public async all(request: Request, response: Response): Promise<void> {
         response.json(await this.gridPersistenceManager.findAll(AutomationNode));
+    }
+
+    @requestMapping()
+    public async unknown(request: Request, response: Response) {
+        response.status(404).send('Unknown node.');
     }
 }
