@@ -13,7 +13,7 @@ else
     -e MYSQL_PASSWORD=automation \
     -e MYSQL_DATABASE=automation \
     mariadb:10.4 || true
-    timeout 5m docker logs -f grid-server-database
+    timeout 5m docker logs -f grid-server-database || true
 fi
 docker rm -f k8s-cucumber-grid-1 k8s-cucumber-grid-2  || true
 docker build -f docker/Dockerfile -t k8s-cucumber-grid:dev .

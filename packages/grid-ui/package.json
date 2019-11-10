@@ -39,7 +39,4 @@
     "tslint": "^5.20.1",
     "tslint-sonarts": "^1.9.0"
   }
-  "prettier": {
-    "printWidth": 160
-  }
 }
