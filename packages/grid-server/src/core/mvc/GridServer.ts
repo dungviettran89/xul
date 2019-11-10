@@ -22,7 +22,9 @@ export class GridServer {
             (this.application as any)[h.method](h.path, h.getHandler());
         });
         if (this.initializingBeans) {
-            for (const b of this.initializingBeans) {
+            let orderedBeans = this.initializingBeans.slice()
+                .sort((a, b)=>{return a.order-b.order;});
+            for (const b of orderedBeans) {
                 let promise = Promise.resolve(b.getHandler()());
                 if (promise) await promise;
             }
