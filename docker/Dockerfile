@@ -26,7 +26,7 @@ RUN git clone --depth 1 https://github.com/novnc/noVNC.git novnc && \
     sed -e 's/id="top_bar"/id="top_bar" style="display:none;"/g' -i index.html
 WORKDIR /app/
 ADD docker/entrypoint.sh /app/entrypoint.sh
-ADD packages/grid-server /app/grid-server
-RUN cd grid-server && npm install
+ADD packages/xul-server /app/xul-server
+RUN cd xul-server && npm install
 ENTRYPOINT ["dumb-init","--"]
 CMD ["./entrypoint.sh"]
