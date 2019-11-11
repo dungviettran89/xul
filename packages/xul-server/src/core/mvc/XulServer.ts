@@ -1,4 +1,4 @@
-import { autowired, xulContext, singleton } from "../context/XulContext";
+import { autowired, singleton, xulContext } from "../context/XulContext";
 import { logger } from "../XulLogger";
 
 import express, { Application } from "express";

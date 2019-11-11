@@ -1,7 +1,7 @@
 import os from "os";
 import { autowired, singleton } from "../../core/context/XulContext";
 import { scheduled } from "../../core/mvc/SchedulingBeans";
-import { GridPersistenceManager } from "../../core/persistence/GridPersistenceManager";
+import { XulEntityManager } from "../../core/persistence/XulEntityManager";
 import { AutomationNode } from "../model/AutomationNode";
 
 import md5 from "md5";
@@ -16,7 +16,7 @@ export class NodeService {
   public current: AutomationNode = new AutomationNode();
   public active: AutomationNode[] = [];
   @autowired()
-  public gridPersistenceManager: GridPersistenceManager;
+  public xulEntityManager: XulEntityManager;
   @autowired()
   public applicationPort: number;
 
@@ -38,12 +38,12 @@ export class NodeService {
 
   @postConstruct()
   public async initialize() {
-    const oldNode: AutomationNode = await this.gridPersistenceManager.findOne(AutomationNode, this.current.id);
+    const oldNode: AutomationNode = await this.xulEntityManager.findOne(AutomationNode, this.current.id);
     if (oldNode) {
       this.current.friendlyName = oldNode.friendlyName;
     }
     await this.updateActiveNode();
-    return await this.gridPersistenceManager.save(this.current);
+    return await this.xulEntityManager.save(this.current);
   }
 
   @scheduled({ interval: 60000 })
@@ -52,11 +52,11 @@ export class NodeService {
       this.current.status = "ready";
     }
     this.current.updated = Date.now();
-    await this.gridPersistenceManager.save(this.current);
+    await this.xulEntityManager.save(this.current);
     return await this.updateActiveNode();
   }
 
   private async updateActiveNode(): Promise<any> {
-    this.active = await this.gridPersistenceManager.findBy(AutomationNode, " updated > ?", Date.now() - 60 * 1000);
+    this.active = await this.xulEntityManager.findBy(AutomationNode, " updated > ?", Date.now() - 60 * 1000);
   }
 }

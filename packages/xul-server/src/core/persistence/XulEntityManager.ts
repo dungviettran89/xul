@@ -5,7 +5,7 @@ import { postConstruct } from "../mvc/InitializingBean";
 import { logger } from "../XulLogger";
 
 @singleton()
-export class GridPersistenceManager {
+export class XulEntityManager {
   private pool: Pool;
 
   constructor() {
@@ -14,14 +14,14 @@ export class GridPersistenceManager {
     const database = process.env.db_name || "automation";
     const user = process.env.db_user || "automation";
     const password = process.env.db_password || "automation";
-    logger.info(`GridPersistenceManager.constructor() url=${host}:${port}/${database}`);
-    logger.info(`GridPersistenceManager.constructor() user=${user}`);
+    logger.info(`XulEntityManager.constructor() url=${host}:${port}/${database}`);
+    logger.info(`XulEntityManager.constructor() user=${user}`);
     this.pool = mariadb.createPool({ host, port, database, user, password });
   }
 
   @postConstruct(-1)
   public async start() {
-    logger.info(`GridPersistenceManager.start() `);
+    logger.info(`XulEntityManager.start() `);
     if (entitySchemas) {
       for (const schema of entitySchemas.values()) {
         logger.info(`Executing ${schema}`);
@@ -57,10 +57,10 @@ export class GridPersistenceManager {
         return `INSERT INTO ${entityTables.get(e.constructor)} (${fields}) VALUES (${inserts}) ON DUPLICATE KEY UPDATE ${updates};`;
       })
       .join("\n");
-    logger.debug(`GridPersistenceManager.saveAll() sql=${sql}`);
-    logger.debug(`GridPersistenceManager.saveAll() parameters=${JSON.stringify(parameters)}`);
+    logger.debug(`XulEntityManager.saveAll() sql=${sql}`);
+    logger.debug(`XulEntityManager.saveAll() parameters=${JSON.stringify(parameters)}`);
     let result: UpsertResult[] = await this.pool.batch({ sql, namedPlaceholders: true }, parameters);
-    logger.debug(`GridPersistenceManager.saveAll() result=${JSON.stringify(result)}`);
+    logger.debug(`XulEntityManager.saveAll() result=${JSON.stringify(result)}`);
     if (!Array.isArray(result)) {
       result = [result as UpsertResult];
     }

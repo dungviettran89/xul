@@ -1,5 +1,5 @@
-import { entity } from "../../core/persistence/GridPersistenceManager";
-import { id } from "../../core/persistence/GridPersistenceManager";
+import { entity } from "../../core/persistence/XulEntityManager";
+import { id } from "../../core/persistence/XulEntityManager";
 
 export type NodeStatus = "initializing" | "ready" | "busy";
 

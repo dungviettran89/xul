@@ -1,4 +1,4 @@
-import { xulContext, singletons } from "../context/XulContext";
+import { singletons, xulContext } from "../context/XulContext";
 
 const initializingBeans: Array<{ order: number; getHandler: () => any }> = [];
 xulContext.singleton("initializingBeans", initializingBeans);

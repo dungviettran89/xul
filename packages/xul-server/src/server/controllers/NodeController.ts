@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { autowired, singleton } from "../../core/context/XulContext";
 import { requestMapping } from "../../core/mvc/RequestMapping";
-import { GridPersistenceManager } from "../../core/persistence/GridPersistenceManager";
+import { XulEntityManager } from "../../core/persistence/XulEntityManager";
 import { logger } from "../../core/XulLogger";
 import { AutomationNode } from "../model/AutomationNode";
 import { NodeService } from "../services/NodeService";
@@ -10,7 +10,7 @@ import { NodeService } from "../services/NodeService";
 @requestMapping("/api/node")
 export class NodeController {
   @autowired()
-  public gridPersistenceManager: GridPersistenceManager;
+  public xulEntityManager: XulEntityManager;
   @autowired()
   public nodeService: NodeService;
 
@@ -26,7 +26,7 @@ export class NodeController {
 
   @requestMapping()
   public async all(request: Request, response: Response): Promise<void> {
-    response.json(await this.gridPersistenceManager.findAll(AutomationNode));
+    response.json(await this.xulEntityManager.findAll(AutomationNode));
   }
 
   @requestMapping()

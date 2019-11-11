@@ -1,4 +1,4 @@
-import { xulContext, singletons } from "../context/XulContext";
+import { singletons, xulContext } from "../context/XulContext";
 import { logger } from "../XulLogger";
 
 const DEFAULT_INITIAL = 1000;
