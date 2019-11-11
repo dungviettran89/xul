@@ -1,5 +1,5 @@
 {
-  "name": "k8s-cucumber-grid",
+  "name": "xul",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dungviettran89/k8s-cucumber-grid.git"
+    "url": "git+https://github.com/dungviettran89/xul.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dungviettran89/k8s-cucumber-grid/issues"
+    "url": "https://github.com/dungviettran89/xul/issues"
   },
-  "homepage": "https://github.com/dungviettran89/k8s-cucumber-grid#readme",
+  "homepage": "https://github.com/dungviettran89/xul#readme",
   "devDependencies": {
     "husky": "^3.0.9",
     "prettier": "^1.19.1",
