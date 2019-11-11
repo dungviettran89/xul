@@ -2,8 +2,8 @@ import { Application } from "express";
 import { IncomingMessage } from "http";
 import proxy from "http-proxy-middleware";
 import { autowired, singleton } from "../../core/context/GridContext";
-import { logger } from "../../core/GridLogger";
 import { postConstruct } from "../../core/mvc/InitializingBean";
+import { logger } from "../../core/XulLogger";
 import { NodeService } from "../services/NodeService";
 
 const UNKNOWN_TARGET = "http://127.0.0.1:8080/api/node/unknown";

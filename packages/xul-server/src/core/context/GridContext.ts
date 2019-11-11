@@ -1,5 +1,5 @@
 import { camelCase } from "lodash";
-import { logger } from "../GridLogger";
+import { logger } from "../XulLogger";
 
 export class GridContext {
   private beans: Map<string, any> = new Map();

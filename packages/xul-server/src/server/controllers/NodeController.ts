@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { autowired, singleton } from "../../core/context/GridContext";
-import { logger } from "../../core/GridLogger";
 import { requestMapping } from "../../core/mvc/RequestMapping";
 import { GridPersistenceManager } from "../../core/persistence/GridPersistenceManager";
+import { logger } from "../../core/XulLogger";
 import { AutomationNode } from "../model/AutomationNode";
 import { NodeService } from "../services/NodeService";
 

@@ -1,5 +1,5 @@
 {
-  "name": "grid-server",
+  "name": "xul-server",
   "version": "1.0.0",
   "description": "",
   "main": "src/Index.js",

@@ -1,8 +1,8 @@
 import { lowerCase } from "lodash";
 import mariadb, { Pool, UpsertResult } from "mariadb";
 import { singleton } from "../context/GridContext";
-import { logger } from "../GridLogger";
 import { postConstruct } from "../mvc/InitializingBean";
+import { logger } from "../XulLogger";
 
 @singleton()
 export class GridPersistenceManager {

@@ -1,5 +1,5 @@
 import { gridContext, singletons } from "../context/GridContext";
-import { logger } from "../GridLogger";
+import { logger } from "../XulLogger";
 
 const DEFAULT_INITIAL = 1000;
 export class ScheduleOptions {

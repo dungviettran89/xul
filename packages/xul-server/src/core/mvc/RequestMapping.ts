@@ -1,6 +1,6 @@
 import { upperCase } from "lodash";
 import { singletons } from "../context/GridContext";
-import { logger } from "../GridLogger";
+import { logger } from "../XulLogger";
 import { gridServer } from "./GridServer";
 
 const handlersMappings: Map<string, Array<{ handler: any; method: string; methodName: string; path: string }>> = new Map();

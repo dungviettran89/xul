@@ -1,5 +1,5 @@
 import { autowired, gridContext, singleton } from "../context/GridContext";
-import { logger } from "../GridLogger";
+import { logger } from "../XulLogger";
 
 import express, { Application } from "express";
 import { ScheduleOptions } from "./SchedulingBeans";
