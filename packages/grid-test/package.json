@@ -5,11 +5,8 @@
   "main": "src/Index.js",
   "scripts": {
     "clean": "rimraf build",
-    "prettier": "prettier --write src/**/*.ts",
-    "tslint": "tslint --fix --project ./tsconfig.json 'src/**/*.{ts,tsx}'",
     "build": "tsc",
-    "start": "ts-node src/Index.ts",
-    "pre-commit": "npm run clean && npm run prettier && npm run tslint && npm run build"
+    "start": "ts-node src/Index.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,8 +19,6 @@
   "devDependencies": {
     "@types/node": "^12.12.7",
     "prettier": "^1.19.0",
-    "rimraf": "^3.0.0",
-    "tslint": "^5.20.1",
-    "tslint-sonarts": "^1.9.0"
+    "rimraf": "^3.0.0"
   }
 }
