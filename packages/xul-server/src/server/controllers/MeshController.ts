@@ -1,7 +1,7 @@
 import { Application } from "express";
 import { IncomingMessage } from "http";
 import proxy from "http-proxy-middleware";
-import { autowired, singleton } from "../../core/context/GridContext";
+import { autowired, singleton } from "../../core/context/XulContext";
 import { postConstruct } from "../../core/mvc/InitializingBean";
 import { logger } from "../../core/XulLogger";
 import { NodeService } from "../services/NodeService";

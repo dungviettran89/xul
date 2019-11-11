@@ -1,7 +1,7 @@
 import { upperCase } from "lodash";
-import { singletons } from "../context/GridContext";
+import { singletons } from "../context/XulContext";
 import { logger } from "../XulLogger";
-import { gridServer } from "./GridServer";
+import { xulServer } from "./XulServer";
 
 const handlersMappings: Map<string, Array<{ handler: any; method: string; methodName: string; path: string }>> = new Map();
 export const requestMapping = (path?: string, method?: string): any => {
@@ -23,7 +23,7 @@ export const requestMapping = (path?: string, method?: string): any => {
     handlers.forEach(h => {
       const requestPath = (path + "/" + h.path).replace("//", "");
       logger.info(`Mapped ${upperCase(h.method)} ${requestPath} to ${beanClass.name}.${h.methodName}()`);
-      gridServer.handlers.push({
+      xulServer.handlers.push({
         getHandler: () => {
           return h.handler.bind(singletons.get(beanClass));
         },

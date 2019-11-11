@@ -1,6 +1,6 @@
 import { lowerCase } from "lodash";
 import mariadb, { Pool, UpsertResult } from "mariadb";
-import { singleton } from "../context/GridContext";
+import { singleton } from "../context/XulContext";
 import { postConstruct } from "../mvc/InitializingBean";
 import { logger } from "../XulLogger";
 

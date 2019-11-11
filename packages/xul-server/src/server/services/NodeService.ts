@@ -1,5 +1,5 @@
 import os from "os";
-import { autowired, singleton } from "../../core/context/GridContext";
+import { autowired, singleton } from "../../core/context/XulContext";
 import { scheduled } from "../../core/mvc/SchedulingBeans";
 import { GridPersistenceManager } from "../../core/persistence/GridPersistenceManager";
 import { AutomationNode } from "../model/AutomationNode";

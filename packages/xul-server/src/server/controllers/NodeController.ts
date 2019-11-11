@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { autowired, singleton } from "../../core/context/GridContext";
+import { autowired, singleton } from "../../core/context/XulContext";
 import { requestMapping } from "../../core/mvc/RequestMapping";
 import { GridPersistenceManager } from "../../core/persistence/GridPersistenceManager";
 import { logger } from "../../core/XulLogger";

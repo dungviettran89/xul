@@ -1,4 +1,4 @@
-import { gridContext, singletons } from "../context/GridContext";
+import { xulContext, singletons } from "../context/XulContext";
 import { logger } from "../XulLogger";
 
 const DEFAULT_INITIAL = 1000;
@@ -7,7 +7,7 @@ export class ScheduleOptions {
   public interval?: number;
 }
 const scheduledBeans: Array<{ option: ScheduleOptions; getHandler: () => any }> = [];
-gridContext.singleton("scheduledBeans", scheduledBeans);
+xulContext.singleton("scheduledBeans", scheduledBeans);
 export const scheduled = (option: ScheduleOptions) => {
   return (clazz?: any, method?: any, descriptor?: any) => {
     if (!option.initial) {

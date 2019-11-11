@@ -1,11 +1,11 @@
-import { autowired, gridContext, singleton } from "../context/GridContext";
+import { autowired, xulContext, singleton } from "../context/XulContext";
 import { logger } from "../XulLogger";
 
 import express, { Application } from "express";
 import { ScheduleOptions } from "./SchedulingBeans";
 
 @singleton()
-export class GridServer {
+export class XulServer {
   public port: number = parseInt(process.env.port || "8080", 10);
   public application: Application = express();
   public handlers: Array<{ path: string; method: string; getHandler: () => any }> = [];
@@ -15,13 +15,13 @@ export class GridServer {
   public scheduledBeans: Array<{ option: ScheduleOptions; getHandler: () => any }>;
 
   constructor() {
-    gridContext.singleton("application", this.application);
-    gridContext.singleton("applicationPort", this.port);
+    xulContext.singleton("application", this.application);
+    xulContext.singleton("applicationPort", this.port);
   }
 
   public async start() {
     const start: number = Date.now();
-    logger.info(`GridApplication.start() Starting application server on port ${this.port}.`);
+    logger.info(`XulServer.start() Starting application server on port ${this.port}.`);
     this.handlers.forEach(h => {
       (this.application as any)[h.method](h.path, h.getHandler());
     });
@@ -29,7 +29,7 @@ export class GridServer {
     await this.scheduleBeans();
     this.application.listen(this.port, () => {
       const duration = Date.now() - start;
-      logger.info(`GridApplication.start() Application server started after ${duration}ms.`);
+      logger.info(`XulServer.start() Application server started after ${duration}ms.`);
     });
   }
 
@@ -61,4 +61,4 @@ export class GridServer {
   }
 }
 
-export const gridServer: GridServer = gridContext.get("gridServer");
+export const xulServer: XulServer = xulContext.get("xulServer");
