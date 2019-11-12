@@ -6,20 +6,21 @@
   "scripts": {
     "clean": "rimraf build",
     "build": "tsc",
-    "start": "ts-node src/Index.ts"
+    "dev": "ts-node-dev test/Index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer-core": "^2.0.0",
-    "ts-node": "^8.4.1",
-    "typescript": "^3.7.2",
-    "winston": "^3.2.1"
+    "puppeteer-core": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.7",
-    "prettier": "^1.19.0",
-    "rimraf": "^3.0.0"
+    "@types/puppeteer": "^1.20.2",
+    "@types/puppeteer-core": "^1.9.0",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.2"
   }
 }

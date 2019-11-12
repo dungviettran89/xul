@@ -9,10 +9,10 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "experimentalDecorators": true
-
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ],
   "exclude": [
     "node_modules"
