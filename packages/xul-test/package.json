@@ -6,12 +6,15 @@
   "scripts": {
     "clean": "rimraf build",
     "build": "tsc",
-    "dev": "ts-node-dev test/Index.ts"
+    "dev": "ts-node-dev test/Index.ts",
+    "test":"cucumber-js test/features/*.feature --require-module ts-node/register --require test/steps/*.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cucumber": "^6.0.0",
+    "cucumber": "^6.0.4",
     "puppeteer-core": "^2.0.0"
   },
   "devDependencies": {
