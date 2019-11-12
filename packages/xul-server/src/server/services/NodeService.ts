@@ -29,7 +29,7 @@ export class NodeService {
       .map(ni => ni.address)
       .filter(a => a !== "127.0.0.1" && a !== "::1")
       .pop();
-    const id: string = md5(address);
+    const id: string = md5(`http://${address}:${this.applicationPort}`);
     const friendlyName: string = camelCase(name.findName());
     const updated: number = Date.now();
     const port: number = this.applicationPort;
@@ -37,7 +37,7 @@ export class NodeService {
   }
 
   @postConstruct()
-  public async initialize() {
+  public async initialize(): Promise<any> {
     const oldNode: AutomationNode = await this.xulEntityManager.findOne(AutomationNode, this.current.id);
     if (oldNode) {
       this.current.friendlyName = oldNode.friendlyName;

@@ -4,6 +4,9 @@ import { postConstruct } from "../../core/mvc/InitializingBean";
 
 import proxy from "http-proxy-middleware";
 
+/**
+ * Headless is default now. Will refactor to this to be more dynamic
+ */
 @singleton()
 export class VncController {
   @autowired()

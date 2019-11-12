@@ -15,7 +15,8 @@ RUN apk --update --no-cache add \
     ca-certificates \
     npm \
     nodejs \
-    dumb-init
+    dumb-init \
+    xrandr
 WORKDIR /vnc/
 RUN git clone --depth 1 https://github.com/novnc/noVNC.git novnc && \
     git clone --depth 1 https://github.com/novnc/websockify novnc/utils/websockify && \

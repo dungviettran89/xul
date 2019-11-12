@@ -18,14 +18,8 @@ fi
 docker rm -f xul-server-1 xul-server-2  || true
 docker build -f docker/Dockerfile -t xul-server:dev .
 
-_term() {
-  echo "Stopping all child!"
-  docker rm -f xul-server-1 xul-server-2  || true
-  exit 1
-}
-
-trap _term SIGTERM
 export SHARED_PARAMS=" -e db_host=xul-database --network=xul-network "
 docker run ${SHARED_PARAMS} --name xul-server-2 xul-server:dev &
 docker run ${SHARED_PARAMS} --name xul-server-1 -p 6080:6080 -p 8080:8080 xul-server:dev &
-wait
+sleep 30m
+docker rm -f xul-server-1 xul-server-2  || true
