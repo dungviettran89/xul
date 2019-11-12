@@ -1,5 +1,5 @@
 {
-  "name": "xul-test",
+  "name": "@xul/test",
   "version": "1.0.0",
   "description": "",
   "main": "src/Index.js",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "puppeteer-core": "^2.0.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.7.2",
     "winston": "^3.2.1"
