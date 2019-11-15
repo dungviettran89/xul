@@ -1,0 +1,20 @@
+{
+  "name": "@xul/core",
+  "version": "1.0.0",
+  "description": "A simple depedencies injection framework",
+  "main": "lib/Index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "ts-node test/Test.ts"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.147",
+    "@types/node": "^12.12.7",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "globs": "^0.1.4",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  }
+}
