@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/cucumber": "^6.0.0",
+    "@xul/core": "next",
     "cucumber": "^6.0.4",
     "puppeteer-core": "^2.0.0"
   },
