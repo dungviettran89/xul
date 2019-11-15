@@ -1,7 +1,7 @@
-import { Application } from "../src/Application";
+import { ClassLoader } from "../src/ClassLoader";
 
 const start = Date.now();
-Application.run({
+ClassLoader.run({
   onStart: () => {
     console.log(`Application started after ${Date.now() - start}ms`);
   }

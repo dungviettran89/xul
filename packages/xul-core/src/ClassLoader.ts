@@ -1,7 +1,7 @@
 import globs from "globs";
 import path from "path";
 import { initializingBeans } from "./InitializingBeans";
-export class Application {
+export class ClassLoader {
   public static async run(options: { baseDir?: string; extensions?: string[]; onStart?: () => any }): Promise<void> {
     const extensions = options.extensions || ["ts", "tsx", "js", "jsx"];
     const baseDir = options.baseDir || path.dirname(process.argv[1]);
