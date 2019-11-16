@@ -1,5 +1,4 @@
-import { context } from "./Context";
-import { singleton, singletons } from "./singleton";
+import { singleton, singletons } from "./Singletons";
 interface IOrderedHanlder {
   order: number;
   getHandler: () => any;

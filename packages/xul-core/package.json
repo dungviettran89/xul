@@ -1,13 +1,14 @@
 {
   "name": "@xul/core",
-  "version": "0.0.2-rc.2",
+  "version": "0.0.2-rc.7",
   "description": "A simple Spring-like depedencies injection framework",
-  "main": "lib/Index.ts",
+  "main": "./lib/Index.js",
+  "types": "./lib/Index.d.ts",
   "scripts": {
     "prebuild": "rimraf lib",
-    "build": "tsc",
+    "build": "tsc --declaration",
     "test": "ts-node test/Test.ts",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run test",
     "release:rc": "npm version prerelease --preid=rc && npm publish --tag=next --access public ",
     "release": "npm version patch && npm publish --tag=latest  --access public "
   },
@@ -39,5 +40,11 @@
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
-  }
+  },
+  "files": [
+    "src/**",
+    "lib/**",
+    "package.json",
+    "package-lock.json"
+  ]
 }
