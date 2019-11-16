@@ -1,15 +1,15 @@
 import { singleton, singletons } from "./Singletons";
-interface IOrderedHanlder {
+export interface IOrderedHandler {
   order: number;
-  getHandler: () => any;
+  getHandler: () => () => any;
 }
 @singleton()
 export class InitializingBeans {
-  private beans: IOrderedHanlder[] = [];
-  public register(handler: IOrderedHanlder): void {
+  private beans: IOrderedHandler[] = [];
+  public register(handler: IOrderedHandler): void {
     this.beans.push(handler);
   }
-  public ordered(): IOrderedHanlder[] {
+  public ordered(): IOrderedHandler[] {
     return this.beans.slice().sort((a, b) => {
       return a.order - b.order;
     });
