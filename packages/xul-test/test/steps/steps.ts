@@ -1,16 +1,14 @@
-import { Given, Then, When } from "cucumber";
+import { Before, Given, Then, When } from "cucumber";
+import { homePage } from "../models/HomePage";
 
-let variable: number = 0;
-Given("a variable set to {int}", (number: number) => {
-  variable = number;
+Given("Customer open home page", async () => {
+  await homePage.open();
 });
 
-When("I increment the variable by {int}", (number: number) => {
-  variable += number;
+When("Customer wait {int} seconds", async (wait: number) => {
+  await new Promise(resolve => setTimeout(resolve, wait * 1000));
 });
 
-Then("the variable should contain {int}", (number: number) => {
-  if (variable !== number) {
-    throw new Error(`Failed test cases`);
-  }
+Then("Popular products are displayed", async () => {
+  console.log("Popular products are displayed");
 });

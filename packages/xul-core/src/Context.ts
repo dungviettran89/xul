@@ -5,6 +5,11 @@ export class Context {
     return this.beans.get(name);
   }
 
+  public set(name: string, bean: any): any {
+    this.beans.set(name, bean);
+    return bean;
+  }
+
   public singleton(name: string, bean: any): any {
     if (this.beans.has(name)) {
       throw new Error(`Duplicate registration of bean ${name}`);

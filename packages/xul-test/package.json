@@ -7,15 +7,16 @@
     "clean": "rimraf build",
     "build": "tsc",
     "dev": "ts-node-dev test/Index.ts",
-    "cucumber": "cucumber-js --require-module ts-node/register --require test/steps/*.ts ",
-    "test": "npm run cucumber -- test/features/*.feature"
+    "cucumber": "cucumber-js --require-module ts-node/register --require test/steps/*.ts",
+    "test": "npm run cucumber -- test/features/*.feature",
+    "updateDevDependencies": "npm install @xul/core@next"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/cucumber": "^6.0.0",
-    "@xul/core": "next",
+    "@xul/core": "0.0.2-rc.9",
     "cucumber": "^6.0.4",
     "puppeteer-core": "^2.0.0"
   },

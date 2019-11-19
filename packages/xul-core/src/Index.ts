@@ -1,3 +1,3 @@
-export { context, Context, autowired } from "./Context";
-export { singleton } from "./Singletons";
-export { onStart, postConstruct } from "./InitializingBeans";
+export * from "./Context";
+export * from "./Singletons";
+export * from "./InitializingBeans";

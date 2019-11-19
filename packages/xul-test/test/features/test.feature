@@ -1,20 +1,16 @@
-Feature: Simple maths
-  In order to do maths
-  As a developer
-  I want to increment variables
+Feature: Customer view product details
 
-  Scenario: easy maths
-    Given a variable set to 1
-    When I increment the variable by 1
-    Then the variable should contain 2
+  Scenario: Customer see popular product
+    Given Customer open home page
+    When Customer wait 3 seconds
+    Then Popular products are displayed
 
-  Scenario Outline: much more complex stuff
-    Given a variable set to <var>
-    When I increment the variable by <increment>
-    Then the variable should contain <result>
+  Scenario: Customer see popular product 2nd times
+    Given Customer open home page
+    When Customer wait 2 seconds
+    Then Popular products are displayed
 
-    Examples:
-      | var | increment | result |
-      | 100 |         5 |    105 |
-      |  99 |      1234 |   1333 |
-      |  12 |         5 |     17 |
+  Scenario: Customer see popular product 3nd times
+    Given Customer open home page
+    When Customer wait 1 seconds
+    Then Popular products are displayed
