@@ -1,6 +1,6 @@
 import { singleton } from "@xul/core";
 import { PageObjectModel } from "../../src/PageObjectModel";
-import { then } from "../../src/Index";
+import { then, when } from "../../src/Index";
 import { ElementHandle } from "puppeteer";
 import { expect } from "chai";
 import { sameString } from "./Utils";
@@ -17,5 +17,19 @@ export class ProductPage extends PageObjectModel {
     expect(sameString(name, await this.page.title())).eq(true, `Product name should be in page title.`);
     let h1Title = await this.page.$("#main > div.row > div > h1[itemprop=name]");
     expect(sameString(await h1Title.evaluate((e: any) => e.innerText), name)).eq(true, `Product name should be displayed.`);
+  }
+
+  @when("Customer clicks on Add To Card")
+  public async addToCart(): Promise<void> {
+    let addToCard: ElementHandle = await this.page.$("#add-to-cart-or-refresh > div.product-add-to-cart > div > div.add > button");
+    await addToCard.click();
+    await this.page.waitForNavigation({ waitUntil: "networkidle2" });
+  }
+
+  @then("Product successfully added to shopping cart")
+  public async successfullyAddedToCard(): Promise<void> {
+    let myModalLabel: ElementHandle = await this.page.$("#myModalLabel");
+    let message: string = await myModalLabel.evaluate((n: any) => n.innerText);
+    expect(message).contain(`Product successfully added to your shopping cart`, `Product must be successfully added to shopping cart`);
   }
 }

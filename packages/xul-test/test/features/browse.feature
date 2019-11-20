@@ -7,6 +7,8 @@ Feature: Customer can browse products
     Then Product category <category> is displayed
     When Customer clicks on product "<product>"
     Then Product page "<product>" is displayed
+    When Customer clicks on Add To Card
+    Then Product successfully added to shopping cart
     Examples:
     | category     | product                        |
     | Art          | any                            |
