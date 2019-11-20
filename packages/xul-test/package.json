@@ -7,8 +7,8 @@
     "clean": "rimraf build",
     "build": "tsc",
     "dev": "ts-node-dev test/Index.ts",
-    "cucumber": "cucumber-js --require-module ts-node/register --require test/steps/*.ts",
-    "test": "npm run cucumber -- test/features/*.feature",
+    "cucumber": "cucumber-js --require-module ts-node/register --require 'test/steps/*.ts'",
+    "test": "npm run cucumber -- 'test/features/*.feature'",
     "updateDevDependencies": "npm install @xul/core@next"
   },
   "keywords": [],
