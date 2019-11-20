@@ -1,16 +1,14 @@
-Feature: Customer view product details
+Feature: Customer can browse products
 
-  Scenario: Customer see popular product
+  Scenario Outline: Customer can view all product details
     Given Customer open home page
-    When Customer wait 1 seconds
     Then Popular products are displayed
-
-  Scenario Outline: Customer open <category> category
-    Given Customer open home page
     When Customer clicks on category <category>
     Then Product category <category> is displayed
-  Examples:
-    | category     |
-    | Art          |
-    | Clothes      |
-    | Accessories  |
+    When Customer clicks on product "<product>"
+    Then Product page "<product>" is displayed
+    Examples:
+    | category     | product                        |
+    | Art          | any                            |
+    | Clothes      | Hummingbird printed t-shirt    |
+    | Accessories  | Mug Today is a good day        |
