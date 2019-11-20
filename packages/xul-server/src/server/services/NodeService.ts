@@ -1,15 +1,10 @@
+import {autowired, postConstruct, scheduled, singleton} from "@xul/core";
+import { name } from "faker/locale/en_US";
+import { camelCase } from "lodash";
+import md5 from "md5";
 import os from "os";
-import { autowired, singleton } from "../../core/context/XulContext";
-import { scheduled } from "../../core/mvc/SchedulingBeans";
 import { XulEntityManager } from "../../core/persistence/XulEntityManager";
 import { AutomationNode } from "../model/AutomationNode";
-
-import md5 from "md5";
-
-import { name } from "faker/locale/en_US";
-
-import { camelCase } from "lodash";
-import { postConstruct } from "../../core/mvc/InitializingBean";
 
 @singleton()
 export class NodeService {

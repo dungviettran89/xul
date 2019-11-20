@@ -1,5 +1,5 @@
+import { singletons } from "@xul/core";
 import { upperCase } from "lodash";
-import { singletons } from "../context/XulContext";
 import { logger } from "../XulLogger";
 import { xulServer } from "./XulServer";
 

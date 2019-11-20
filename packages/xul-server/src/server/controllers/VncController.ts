@@ -1,7 +1,6 @@
 import { Application } from "express";
-import { autowired, singleton } from "../../core/context/XulContext";
-import { postConstruct } from "../../core/mvc/InitializingBean";
 
+import { autowired, postConstruct, singleton } from "@xul/core";
 import proxy from "http-proxy-middleware";
 
 /**
