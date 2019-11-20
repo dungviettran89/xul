@@ -11,12 +11,12 @@ export class PuppeteerContext {
   public browser: Browser;
   public page: Page;
   @autowired()
-  puppeteerConfiguration: IPuppeteerConfiguration;
+  public puppeteerConfiguration: IPuppeteerConfiguration;
 
   public async before() {
-    let config: IPuppeteerConfiguration = this.puppeteerConfiguration || { width: 1366, height: 768 };
-    let width: number = config.width || 1366;
-    let height: number = config.height || 768;
+    const config: IPuppeteerConfiguration = this.puppeteerConfiguration || { width: 1366, height: 768 };
+    const width: number = config.width || 1366;
+    const height: number = config.height || 768;
     this.browser = await puppeteer.launch({
       args: [`--window-size=${width},${height}`],
       executablePath: "/usr/bin/chromium-browser",

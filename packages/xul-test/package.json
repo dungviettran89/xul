@@ -1,34 +1,57 @@
 {
   "name": "@xul/test",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "src/Index.js",
+  "main": "./lib/Index.js",
+  "types": "./lib/Index.d.ts",
   "scripts": {
-    "clean": "rimraf build",
-    "build": "tsc",
-    "dev": "ts-node-dev test/Index.ts",
+    "clean": "rimraf lib",
+    "build": "tsc --declaration",
     "cucumber": "cucumber-js --require-module ts-node/register --require 'test/steps/*.ts'",
     "test": "npm run cucumber -- 'test/features/*.feature'",
-    "updateDevDependencies": "npm install @xul/core@next"
+    "updateDevDependencies": "npm install @xul/core@next",
+    "prepublishOnly": "npm run build && npm run test",
+    "release:rc": "npm version prerelease --preid=rc && npm publish --tag=next --access public ",
+    "release": "npm version patch && npm publish --tag=latest  --access public "
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dungviettran89/xul.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dungviettran89/xul/issues"
+  },
+  "homepage": "https://github.com/dungviettran89/xul#readme",
+  "keywords": [
+    "xul",
+    "automation",
+    "test",
+    "cucumber",
+    "puppeteer"
+  ],
+  "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^12.12.7",
+    "@types/puppeteer": "^1.20.2",
+    "@types/puppeteer-core": "^1.9.0",
     "@types/chai": "^4.2.5",
     "@types/cucumber": "^6.0.0",
     "@xul/core": "0.0.2-rc.9",
     "chai": "^4.2.0",
     "cucumber": "^6.0.4",
-    "puppeteer-core": "^2.0.0"
+    "puppeteer-core": "^2.0.0",
+    "ts-node": "^8.5.0",
+    "typescript": "^3.7.2"
   },
   "devDependencies": {
-    "@types/node": "^12.12.7",
-    "@types/puppeteer": "^1.20.2",
-    "@types/puppeteer-core": "^1.9.0",
     "rimraf": "^3.0.0",
-    "ts-node": "^8.5.0",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.7.2"
-  }
+    "ts-node-dev": "^1.0.0-pre.44"
+  },
+  "files": [
+    "src/**",
+    "lib/**",
+    "package.json",
+    "package-lock.json"
+  ]
 }

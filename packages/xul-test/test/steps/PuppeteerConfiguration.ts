@@ -5,5 +5,4 @@ import { singleton } from "@xul/core";
 export class PuppeteerConfiguration implements IPuppeteerConfiguration {
   width: number = 1024;
   height: number = 576;
-
 }
