@@ -16,7 +16,7 @@ export class MeshController {
 
   @postConstruct()
   public async initialize() {
-    let defaultTarget = `http://127.0.0.1:${this.applicationPort}/api/node/unknown`;
+    const defaultTarget = `http://127.0.0.1:${this.applicationPort}/api/node/unknown`;
     this.application.use(
       proxy("/_mesh", {
         changeOrigin: true,

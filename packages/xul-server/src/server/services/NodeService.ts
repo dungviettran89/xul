@@ -1,4 +1,4 @@
-import {autowired, postConstruct, scheduled, singleton} from "@xul/core";
+import { autowired, postConstruct, scheduled, singleton } from "@xul/core";
 import { name } from "faker/locale/en_US";
 import { camelCase } from "lodash";
 import md5 from "md5";
