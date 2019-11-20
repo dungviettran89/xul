@@ -10,6 +10,7 @@ export class PuppeteerContext {
 
   public async before() {
     this.browser = await puppeteer.launch({
+      args: ["--window-size=1366,768"],
       executablePath: "/usr/bin/chromium-browser",
       headless: false
     });

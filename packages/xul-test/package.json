@@ -15,8 +15,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/chai": "^4.2.5",
     "@types/cucumber": "^6.0.0",
     "@xul/core": "0.0.2-rc.9",
+    "chai": "^4.2.0",
     "cucumber": "^6.0.4",
     "puppeteer-core": "^2.0.0"
   },

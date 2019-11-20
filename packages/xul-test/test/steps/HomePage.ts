@@ -1,6 +1,8 @@
 import { singleton, singletons } from "@xul/core";
 import { PageObjectModel } from "../../src/PageObjectModel";
 import { given, then, when } from "../../src/Decorators";
+import { ElementHandle } from "puppeteer";
+import { expect } from "chai";
 
 @singleton()
 export class HomePage extends PageObjectModel {
@@ -14,9 +16,24 @@ export class HomePage extends PageObjectModel {
     return await new Promise(resolve => setTimeout(resolve, seconds * 1000));
   }
 
+  @when("Customer clicks on category {word}")
+  public async customerClicksOn(category: string) {
+    let categories: Array<ElementHandle> = await this.page.$$("#top-menu li a");
+    for (let c of categories) {
+      let title: string = await c.evaluate((n: any) => n.innerText);
+      if (title.toLowerCase() === category.toLowerCase()) {
+        await c.click();
+        await this.page.waitForNavigation({ waitUntil: "networkidle2" });
+        return;
+      }
+    }
+    throw `Cannot find category ${category}`;
+  }
+
   @then("Popular products are displayed")
   public async popularProductsAreDisplayed() {
-    console.log("Popular products are displayed");
+    let titles: Array<ElementHandle> = await this.page.$$("#content > section > div > article > div > div.product-description > h1 > a");
+    expect(titles !== null && titles.length > 0).eq(true, `Popular products must be displayed.`);
   }
 }
 

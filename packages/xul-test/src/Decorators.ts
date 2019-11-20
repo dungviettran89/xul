@@ -13,7 +13,9 @@ export const then = (pattern: string) => decorateCucumber(Then, pattern);
 export const when = (pattern: string) => decorateCucumber(When, pattern);
 setDefinitionFunctionWrapper((fn: any) => {
   return async (...args: any[]) => {
-    if (fn.getInstance === undefined) { return await fn(); }
+    if (fn.getInstance === undefined) {
+      return await fn();
+    }
     return await fn.apply(fn.getInstance(), args);
   };
 });
