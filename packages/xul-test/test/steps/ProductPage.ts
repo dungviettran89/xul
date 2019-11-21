@@ -22,14 +22,19 @@ export class ProductPage extends PageObjectModel {
   @when("Customer clicks on Add To Card")
   public async addToCart(): Promise<void> {
     let addToCard: ElementHandle = await this.page.$("#add-to-cart-or-refresh > div.product-add-to-cart > div > div.add > button");
-    await addToCard.click();
-    await this.page.waitForNavigation({ waitUntil: "networkidle2" });
+    await addToCard.click({ delay: 50 });
+    await this.page.waitFor("#myModalLabel");
   }
 
   @then("Product successfully added to shopping cart")
   public async successfullyAddedToCard(): Promise<void> {
-    let myModalLabel: ElementHandle = await this.page.$("#myModalLabel");
-    let message: string = await myModalLabel.evaluate((n: any) => n.innerText);
+    let myModalLabel = await this.page.$("#myModalLabel");
+    let message = await myModalLabel.evaluate((n: any) => n.innerText);
     expect(message).contain(`Product successfully added to your shopping cart`, `Product must be successfully added to shopping cart`);
+  }
+
+  @when("Customer close cart modal")
+  public async closeCartModal() {
+    await this.page.evaluate(`document.querySelector('#blockcart-modal button.close').click()`);
   }
 }

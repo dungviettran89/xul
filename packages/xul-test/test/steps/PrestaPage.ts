@@ -4,18 +4,17 @@ import { ElementHandle } from "puppeteer";
 import { singleton } from "@xul/core";
 
 @singleton()
-export abstract class PrestaPage extends PageObjectModel {
+export class PrestaPage extends PageObjectModel {
   @when("Customer clicks on category {word}")
   public async customerClicksOn(category: string) {
-    let categories: Array<ElementHandle> = await this.page.$$("#top-menu > li > a");
-    for (let c of categories) {
-      let title: string = await c.evaluate((n: any) => n.innerText);
-      if (title.toLowerCase() === category.toLowerCase()) {
-        await c.click();
-        await this.page.waitForNavigation({ waitUntil: "networkidle2" });
-        return;
-      }
-    }
-    throw `Cannot find category ${category}`;
+    let categories = await this.queryByInnerText("#top-menu > li > a", new RegExp(category, "i"));
+    await categories.pop().click();
+    await this.page.waitForNavigation({ waitUntil: "networkidle2" });
+  }
+
+  @when("Customer clicks on Cart")
+  public async customerClicksOnCart() {
+    await this.page.evaluate(`document.querySelector('#_desktop_cart a').click()`);
+    await this.page.waitForNavigation({ waitUntil: "networkidle2" });
   }
 }
