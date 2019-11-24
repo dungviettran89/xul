@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier --write 'packages/**/*.{ts,tsx,html,css,js}'",
-    "tslint": "tslint --fix 'packages/*/src/**/*.{ts,tsx}'",
+    "prettier": "prettier --write 'packages/*/{src,public,test}/**/*.{ts,tsx,html,css,js}'",
+    "tslint": "tslint --fix 'packages/*/{src,public,test}/**/*.{ts,tsx}'",
     "pre-commit": "npm run prettier && npm run tslint"
   },
   "repository": {

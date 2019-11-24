@@ -5,11 +5,13 @@ import { Singleton1 } from "./Singleton1";
 @singleton()
 class Singleton2 extends AbstractSingleton {
   @autowired()
-  singleton1: Singleton1;
+  public singleton1: Singleton1;
 
   @postConstruct()
   public async start(): Promise<void> {
-    if (!this.singleton1) throw `Autowired failed, field is null`;
+    if (!this.singleton1) {
+      throw new Error(`Autowired failed, field is null`);
+    }
     console.log(`singleton2 started successfully.`);
   }
 }

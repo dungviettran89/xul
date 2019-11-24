@@ -1,8 +1,8 @@
 import { singleton, singletons } from "@xul/core";
-import { PageObjectModel } from "../../src/PageObjectModel";
-import { given, then, when } from "../../src/Decorators";
-import { ElementHandle } from "puppeteer";
 import { expect } from "chai";
+import { ElementHandle } from "puppeteer";
+import { given, then, when } from "../../src/Decorators";
+import { PageObjectModel } from "../../src/PageObjectModel";
 
 @singleton()
 export class HomePage extends PageObjectModel {
@@ -13,7 +13,7 @@ export class HomePage extends PageObjectModel {
 
   @then("Popular products are displayed")
   public async popularProductsAreDisplayed() {
-    let titles: Array<ElementHandle> = await this.page.$$("#content > section > div > article > div > div.product-description > h1 > a");
+    const titles: ElementHandle[] = await this.page.$$("#content > section > div > article > div > div.product-description > h1 > a");
     expect(titles !== null && titles.length > 0).eq(true, `Popular products must be displayed.`);
   }
 }

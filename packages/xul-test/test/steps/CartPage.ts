@@ -1,13 +1,13 @@
-import { PageObjectModel } from "../../src/PageObjectModel";
 import { singleton } from "@xul/core";
-import { then, when } from "../../src/Decorators";
 import { expect } from "chai";
+import { then, when } from "../../src/Decorators";
+import { PageObjectModel } from "../../src/PageObjectModel";
 @singleton()
 export class CartPage extends PageObjectModel {
   @then("Shopping cart should contains product {string}")
   public async cartShouldContainProduct(name: string) {
-    let regex = name === "any" || name === undefined ? /.*/g : new RegExp(name, "i");
-    let productsInCart = await this.queryByInnerText(`li.cart-item a.label`, regex);
+    const regex = name === "any" || name === undefined ? /.*/g : new RegExp(name, "i");
+    const productsInCart = await this.queryByInnerText(`li.cart-item a.label`, regex);
     expect(productsInCart.length).gt(0, `Product ${name} should be in cart`);
   }
 
