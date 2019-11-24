@@ -3,7 +3,7 @@ import { then } from "../../src/Decorators";
 import { PageObjectModel } from "../../src/PageObjectModel";
 import { expect } from "chai";
 import { ElementHandle } from "puppeteer";
-import { when } from "../../lib/src/Decorators";
+import { when } from "../../src/Decorators";
 import { sameString } from "./Utils";
 
 @singleton()

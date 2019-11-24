@@ -8,5 +8,8 @@ do
     echo "Building ${PACKAGE_JSON}"
     cd $(dirname ${PACKAGE_JSON})
     npm i
+    npm run build
 done
+cd ${MAIN}
+npm run pre-commit
 
