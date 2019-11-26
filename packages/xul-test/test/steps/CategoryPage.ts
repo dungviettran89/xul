@@ -16,7 +16,7 @@ export class CategoryPage extends PageObjectModel {
   @when("Customer clicks on product {string}")
   public async clickOnProductTitle(name: string): Promise<void> {
     const regex: RegExp = name === "any" || name === undefined ? /.*/g : new RegExp(name, "i");
-    const products = await this.queryByInnerText("#js-product-list > div.products.row > article > div > div.product-description > h1 > a", regex);
+    const products = await this.queryByInnerText("#js-product-list > div.products.row > article > div > div.product-description a", regex);
     const product = products.pop();
     await product.click();
     await this.page.waitForNavigation({ waitUntil: "networkidle2" });
