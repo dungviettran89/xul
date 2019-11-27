@@ -16,7 +16,7 @@ else
     timeout 5m docker logs -f xul-database || true
 fi
 docker rm -f xul-server-1 xul-server-2  || true
-docker build -f docker/Dockerfile -t xul-server:dev .
+docker build -f docker/xul-server/xul-server.dockerfile -t xul-server:dev .
 
 export SHARED_PARAMS=" -e db_host=xul-database --network=xul-network "
 docker run ${SHARED_PARAMS} --name xul-server-2 xul-server:dev &
