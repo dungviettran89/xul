@@ -1,4 +1,4 @@
-import { initializingBeans } from "@xul/core";
+import { context } from "@xul/core";
 import globs from "globs";
 import path from "path";
 export class ClassLoader {
@@ -13,11 +13,7 @@ export class ClassLoader {
         f = f.replace(baseDir, relative);
         require(f);
       });
-
-      for (const handler of initializingBeans.ordered()) {
-        await safeInvoke(handler.getHandler());
-      }
-
+      await context.initialize();
       await safeInvoke(options.onStart);
     });
   }
