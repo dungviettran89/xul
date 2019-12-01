@@ -1,8 +1,9 @@
 import { ConsoleLogWriter } from "./ConsoleLogWriter";
 
 export class Log {
+  public defaultPrefix: string = "application";
   public level: LogLevel = "info";
-  private writer: ILogWriter = new ConsoleLogWriter();
+  public writer: ILogWriter = new ConsoleLogWriter();
 
   public d(context: any, message?: any, ...optionalParams: any[]) {
     this._log(context, "debug", message, ...optionalParams);
@@ -48,7 +49,7 @@ export class Log {
     if (LevelMap.get(this.level) > LevelMap.get(level)) {
       return;
     }
-    const prefix: string = typeof context === "string" ? context : (context && context.constructor.name) || "";
+    const prefix: string = typeof context === "string" ? context : (context && context.constructor.name) || this.defaultPrefix;
     const logDate = new Date().toISOString();
     const logLevel = level.toUpperCase().padEnd(7);
     const logPrefix = prefix.padStart(16);
@@ -61,7 +62,7 @@ export interface ILogWriter {
 }
 export const LOG = new Log();
 export type LogLevel = "info" | "trace" | "warn" | "error" | "debug";
-const LevelMap: Map<string, number> = new Map();
+export const LevelMap: Map<string, number> = new Map();
 LevelMap.set("trace", 0);
 LevelMap.set("debug", 3);
 LevelMap.set("info", 5);

@@ -1,8 +1,9 @@
 import { context } from "../src/Context";
 import { LOG, LogLevel } from "../src/log/Log";
+import { LOGGER } from "../src/Logger";
 import "./singleton/Singleton1";
 import "./singleton/Singleton2";
-declare var process: any;
+LOGGER.level = "info";
 (async () => {
   await context.initialize();
   await new Promise(r => setTimeout(r, 8000));

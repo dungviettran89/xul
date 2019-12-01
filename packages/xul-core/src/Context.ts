@@ -1,5 +1,5 @@
 import { autowires, IAutowireOption } from "./Autowires";
-import { LOG } from "./log/Log";
+import { LOGGER } from "./Logger";
 import { safeInvoke } from "./Utils";
 export class Context {
   private beans: Map<string, any> = new Map();
@@ -38,7 +38,7 @@ export class Context {
     for (const handler of this.lifeCycleHandlers) {
       await safeInvoke(handler.onContextInitialized);
     }
-    LOG.d(this, `Context intialized.`);
+    LOGGER.info( `Context intialized.`);
   }
 }
 export interface ILifeCycleHandler {

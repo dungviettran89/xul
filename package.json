@@ -6,7 +6,7 @@
   "scripts": {
     "prettier": "prettier --write 'packages/*/{src,public,test}/**/*.{ts,tsx,html,css,js}'",
     "tslint": "tslint --fix 'packages/*/{src,public,test}/**/*.{ts,tsx}'",
-    "pre-commit": "npm run prettier && npm run tslint"
+    "pre-commit": "npm run tslint && npm run prettier"
   },
   "repository": {
     "type": "git",
