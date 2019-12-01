@@ -1,7 +1,7 @@
-import { getLogger } from "../../src/log/LoggerFactory";
+import { LOG } from "../../src/log/Log";
 
 export class AbstractSingleton {
   constructor() {
-    getLogger(`xul.core.test.${this.constructor.name}`).log(`Instance created`);
+    LOG.i(this, `Instance created`);
   }
 }

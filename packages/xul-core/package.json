@@ -7,6 +7,7 @@
   "scripts": {
     "prebuild": "rimraf lib",
     "build": "tsc --declaration",
+    "pretest": "npm run prebuild",
     "test": "ts-node test/Test.ts",
     "prepublishOnly": "npm run build && npm run test",
     "release:rc": "npm version prerelease --preid=rc && npm publish --tag=next --access public ",
@@ -30,13 +31,11 @@
   "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
-    "@types/glob": "^7.1.1",
     "@types/lodash": "^4.14.147",
-    "@types/node": "^12.12.7",
+    "@types/node": "^12.12.14",
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "globs": "^0.1.4",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
