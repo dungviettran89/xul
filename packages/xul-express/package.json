@@ -1,0 +1,53 @@
+{
+  "name": "@xul/express",
+  "version": "0.0.2-rc.12",
+  "description": "A simple SpringBOOT-like web framework",
+  "main": "./lib/Index.js",
+  "types": "./lib/Index.d.ts",
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "tsc --declaration",
+    "test": "ts-node test/Test.ts",
+    "prepublishOnly": "npm run build && npm run test",
+    "release:rc": "npm version prerelease --preid=rc && npm publish --tag=next --access public ",
+    "release": "npm version patch && npm publish --tag=latest  --access public "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dungviettran89/xul.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dungviettran89/xul/issues"
+  },
+  "homepage": "https://github.com/dungviettran89/xul#readme",
+  "keywords": [
+    "xul",
+    "automation",
+    "test",
+    "dependency injection",
+    "express"
+  ],
+  "author": "dungviettran89",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "@types/glob": "^7.1.1",
+    "@types/lodash": "^4.14.147",
+    "@types/node": "^12.12.7",
+    "@xul/core": "next",
+    "express": "^4.17.1",
+    "globs": "^0.1.4",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  },
+  "files": [
+    "src/**",
+    "lib/**",
+    "package.json",
+    "package-lock.json"
+  ]
+}

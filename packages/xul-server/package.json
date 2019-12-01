@@ -14,8 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@xul/core": "0.0.2-rc.12",
-    "@xul/test": "0.0.2-rc.4",
+    "@xul/core": "next",
+    "@xul/test": "next",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "globs": "^0.1.4",

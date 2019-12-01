@@ -1,10 +1,12 @@
+import { ILifeCycleHandler } from "./Context";
 import { singleton, singletons } from "./Singletons";
+import { safeInvoke } from "./Utils";
 export interface IOrderedHandler {
   order: number;
   getHandler: () => () => any;
 }
 @singleton()
-export class InitializingBeans {
+export class InitializingBeans implements ILifeCycleHandler {
   private beans: IOrderedHandler[] = [];
   public register(handler: IOrderedHandler): void {
     this.beans.push(handler);
@@ -13,6 +15,12 @@ export class InitializingBeans {
     return this.beans.slice().sort((a, b) => {
       return a.order - b.order;
     });
+  }
+
+  public async onContextInitialized(): Promise<void> {
+    for (const handler of initializingBeans.ordered()) {
+      await safeInvoke(handler.getHandler());
+    }
   }
 }
 export const initializingBeans: InitializingBeans = singletons.get(InitializingBeans);

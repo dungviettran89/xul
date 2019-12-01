@@ -1,5 +1,5 @@
-import { postConstruct, singleton } from "./Index";
-import { singletons } from "./Singletons";
+import { postConstruct } from "./InitializingBeans";
+import { singleton, singletons } from "./Singletons";
 
 export interface IScheduleOption {
   timeout?: number;

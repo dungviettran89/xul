@@ -1,10 +1,9 @@
-import { ClassLoader } from "../src/ClassLoader";
+import { context } from "../src/Context";
+import "./singleton/Singleton1";
+import "./singleton/Singleton2";
 
-const start = Date.now();
-ClassLoader.run({
-  onStart: async () => {
-    console.log(`Application started after ${Date.now() - start}ms`);
-    await new Promise(r => setTimeout(r, 15000));
-    process.exit();
-  }
-});
+(async () => {
+  await context.initialize();
+  await new Promise(r => setTimeout(r, 15000));
+  process.exit();
+})();

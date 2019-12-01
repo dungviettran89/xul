@@ -1,6 +1,6 @@
+import { initializingBeans } from "@xul/core";
 import globs from "globs";
 import path from "path";
-import { initializingBeans } from "./InitializingBeans";
 export class ClassLoader {
   public static async run(options: { baseDir?: string; extensions?: string[]; onStart?: () => any }): Promise<void> {
     const extensions = options.extensions || ["ts", "tsx", "js", "jsx"];
