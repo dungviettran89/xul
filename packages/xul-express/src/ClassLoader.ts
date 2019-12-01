@@ -4,7 +4,7 @@ import path from "path";
 export class ClassLoader {
   public static async run(options: { baseDir?: string; extensions?: string[]; onStart?: () => any }): Promise<void> {
     const extensions = options.extensions || ["ts", "tsx", "js", "jsx"];
-    const baseDir = options.baseDir || path.dirname(process.argv[1]);
+    const baseDir = options.baseDir || path.dirname(require.main.filename);
     const extension = new RegExp(`\\.(${extensions.join("|")})`, "g");
     const relative = path.relative(__dirname, baseDir);
     globs(`${baseDir}/**/*.{${extensions.join(",")}}`, async (err, files) => {

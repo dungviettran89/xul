@@ -1,5 +1,6 @@
 import { autowired, postConstruct, singleton, singletons } from "@xul/core";
 import { ExpressServer } from "./ExpressServer";
+import { LOGGER } from "./Logger";
 export interface IRequestMappingOption {
   path?: string;
   method?: string;
@@ -11,7 +12,7 @@ export class RequestMappings {
 
   @postConstruct(ExpressServer.ORDER - 1)
   public onStart() {
-    console.log(`Wiring up application`);
+    LOGGER.d(`Wiring up application`);
   }
 }
 

@@ -38,7 +38,7 @@ export class Context {
     for (const handler of this.lifeCycleHandlers) {
       await safeInvoke(handler.onContextInitialized);
     }
-    LOGGER.info( `Context intialized.`);
+    LOGGER.info(`Context intialized.`);
   }
 }
 export interface ILifeCycleHandler {

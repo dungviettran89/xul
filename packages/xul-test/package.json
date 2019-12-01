@@ -37,7 +37,7 @@
     "@types/node": "^12.12.14",
     "@types/puppeteer": "^1.20.3",
     "@types/puppeteer-core": "^1.9.0",
-    "@xul/core": "0.0.2-rc.14",
+    "@xul/core": "0.0.2-rc.17",
     "chai": "^4.2.0",
     "cucumber": "^6.0.5",
     "puppeteer-core": "^2.0.0",

@@ -1,5 +1,7 @@
+import { LOGGER } from "../../src/Logger";
+
 export class AbstractSingleton {
   constructor() {
-    console.log(`${this.constructor.name} created`);
+    LOGGER.d(`${this.constructor.name} created`);
   }
 }

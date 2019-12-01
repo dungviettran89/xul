@@ -2,7 +2,7 @@ import { ConsoleLogWriter } from "./ConsoleLogWriter";
 
 export class Log {
   public defaultPrefix: string = "application";
-  public level: LogLevel = "info";
+  public level: LogLevel = "trace";
   public writer: ILogWriter = new ConsoleLogWriter();
 
   public d(context: any, message?: any, ...optionalParams: any[]) {
@@ -52,7 +52,7 @@ export class Log {
     const prefix: string = typeof context === "string" ? context : (context && context.constructor.name) || this.defaultPrefix;
     const logDate = new Date().toISOString();
     const logLevel = level.toUpperCase().padEnd(7);
-    const logPrefix = prefix.padStart(16);
+    const logPrefix = prefix.padStart(12);
     message = `${logDate} ${logLevel} [${logPrefix}] ${message}`;
     this.writer.log(level, message, ...optionalParams);
   }

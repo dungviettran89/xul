@@ -1,6 +1,6 @@
 {
   "name": "@xul/core",
-  "version": "0.0.2-rc.14",
+  "version": "0.0.2-rc.17",
   "description": "A simple Spring-like depedencies injection framework",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
@@ -9,7 +9,7 @@
     "build": "tsc --declaration",
     "pretest": "npm run prebuild",
     "test": "ts-node test/Test.ts",
-    "prepublishOnly": "npm run build && npm run test",
+    "prepublishOnly": "npm run test && npm run build",
     "release:rc": "npm version prerelease --preid=rc && npm publish --tag=next --access public ",
     "release": "npm version patch && npm publish --tag=latest  --access public "
   },

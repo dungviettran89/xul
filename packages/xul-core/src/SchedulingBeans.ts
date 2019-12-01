@@ -36,8 +36,8 @@ export class SchedulingBeans {
 
 export const scheduledBeans: SchedulingBeans = singletons.get(SchedulingBeans);
 export const scheduled = (option: IScheduleOption) => {
-  return (clazz?: any, method?: any, descriptor?: any) => {
-    scheduledBeans.register({ option, getHandler: () => descriptor.value.bind(singletons.get(clazz.constructor)) });
+  return (beanOrClass: any, method?: any, descriptor?: any) => {
+    scheduledBeans.register({ option, getHandler: () => descriptor.value.bind(singletons.get(beanOrClass.constructor)) });
     return descriptor;
   };
 };

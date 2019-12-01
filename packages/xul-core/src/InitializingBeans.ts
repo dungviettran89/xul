@@ -25,8 +25,8 @@ export class InitializingBeans implements ILifeCycleHandler {
 }
 export const initializingBeans: InitializingBeans = singletons.get(InitializingBeans);
 export const onStart = (order: number = 100) => {
-  return (clazz: any, method?: any, descriptor?: any) => {
-    initializingBeans.register({ order, getHandler: () => descriptor.value.bind(singletons.get(clazz.constructor)) });
+  return (beanOrClass: any, method?: any, descriptor?: any) => {
+    initializingBeans.register({ order, getHandler: () => descriptor.value.bind(singletons.get(beanOrClass.constructor)) });
   };
 };
 export const postConstruct = onStart;

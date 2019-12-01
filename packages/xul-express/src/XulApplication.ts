@@ -1,5 +1,6 @@
 import { singleton } from "@xul/core";
 import { ClassLoader } from "./ClassLoader";
+import { LOGGER } from "./Logger";
 
 export const xulApplication = () => {
   return (beanClass: any): any => {
@@ -7,7 +8,7 @@ export const xulApplication = () => {
     const start = Date.now();
     ClassLoader.run({
       onStart: async () => {
-        console.log(`${beanClass.name} started after ${Date.now() - start}ms`);
+        LOGGER.i(`${beanClass.name} started after ${Date.now() - start}ms`);
       }
     });
     return beanClass;

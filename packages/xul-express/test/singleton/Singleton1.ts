@@ -1,5 +1,6 @@
 import { singleton } from "@xul/core";
 import { scheduled } from "@xul/core";
+import { LOGGER } from "../../src/Logger";
 import { requestMapping } from "../../src/RequestMappings";
 import { AbstractSingleton } from "./AbstractSingleton";
 
@@ -13,6 +14,6 @@ export class Singleton1 extends AbstractSingleton {
 
   @scheduled({ timeout: 500, interval: 5000 })
   public tick(): void {
-    console.log(`Tick ${new Date()}`);
+    LOGGER.d(`Tick ${new Date()}`);
   }
 }

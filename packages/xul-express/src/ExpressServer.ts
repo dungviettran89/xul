@@ -1,5 +1,6 @@
 import { autowired, context, ILifeCycleHandler, postConstruct, singleton, singletons } from "@xul/core";
 import express, { Application } from "express";
+import { LOGGER } from "./Logger";
 
 @singleton("xul.express.server")
 export class ExpressServer {
@@ -16,7 +17,7 @@ export class ExpressServer {
   @postConstruct(ExpressServer.ORDER)
   public async start() {
     this.application.listen(this.port, () => {
-      console.log(`XulExpress.start() Application server started at http://127.0.0.1:${this.port}/`);
+      LOGGER.d(`Application server started at http://127.0.0.1:${this.port}/`);
     });
   }
 }

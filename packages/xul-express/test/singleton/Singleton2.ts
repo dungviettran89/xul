@@ -1,4 +1,5 @@
 import { autowired, postConstruct, singleton } from "@xul/core";
+import { LOGGER } from "../../src/Logger";
 import { AbstractSingleton } from "./AbstractSingleton";
 import { Singleton1 } from "./Singleton1";
 
@@ -12,6 +13,6 @@ class Singleton2 extends AbstractSingleton {
     if (!this.singleton1) {
       throw new Error(`Autowired failed, field is null`);
     }
-    console.log(`singleton2 started successfully.`);
+    LOGGER.d(`singleton2 started successfully.`);
   }
 }
