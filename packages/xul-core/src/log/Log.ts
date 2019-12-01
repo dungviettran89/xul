@@ -52,7 +52,7 @@ export class Log {
     const prefix: string = typeof context === "string" ? context : (context && context.constructor.name) || this.defaultPrefix;
     const logDate = new Date().toISOString();
     const logLevel = level.toUpperCase().padEnd(7);
-    const logPrefix = prefix.padStart(12);
+    const logPrefix = prefix.padStart(16);
     message = `${logDate} ${logLevel} [${logPrefix}] ${message}`;
     this.writer.log(level, message, ...optionalParams);
   }
