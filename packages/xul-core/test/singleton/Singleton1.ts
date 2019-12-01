@@ -1,4 +1,5 @@
 import { singleton } from "../../src/Index";
+import { logger } from "../../src/log/LoggerFactory";
 import { scheduled } from "../../src/SchedulingBeans";
 import { AbstractSingleton } from "./AbstractSingleton";
 
@@ -6,6 +7,6 @@ import { AbstractSingleton } from "./AbstractSingleton";
 export class Singleton1 extends AbstractSingleton {
   @scheduled({ timeout: 500, interval: 5000 })
   public tick(): void {
-    console.log(`Tick ${new Date()}`);
+    logger(`xul.core.test.${Singleton1.name}`).log(`Tick ${new Date()}`);
   }
 }

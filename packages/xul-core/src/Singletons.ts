@@ -9,6 +9,7 @@ export const singleton = (name?: string) => {
     beanClass.INSTANCE = instance;
     context.singleton(name, instance);
     singletons.set(beanClass, instance);
+    instance.originalConstructor = beanClass;
     beanClass.constructor = () => {
       throw new Error(`${beanClass.name} is singleton.`);
     };

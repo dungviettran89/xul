@@ -1,8 +1,6 @@
 import { autowires, IAutowireOption } from "./Autowires";
+import { logger } from "./log/LoggerFactory";
 import { safeInvoke } from "./Utils";
-export interface ILifeCycleHandler {
-  onContextInitialized(): Promise<void>;
-}
 export class Context {
   private beans: Map<string, any> = new Map();
   private lifeCycleHandlers: ILifeCycleHandler[] = [];
@@ -40,6 +38,11 @@ export class Context {
     for (const handler of this.lifeCycleHandlers) {
       await safeInvoke(handler.onContextInitialized);
     }
+    log.info(`Context intialized.`);
   }
 }
+export interface ILifeCycleHandler {
+  onContextInitialized(): Promise<void>;
+}
 export const context = new Context();
+const log = logger(`xul.core.${Context.name}`);
