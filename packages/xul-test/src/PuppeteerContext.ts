@@ -5,6 +5,8 @@ import puppeteer from "puppeteer-core";
 export interface IPuppeteerConfiguration {
   width?: number;
   height?: number;
+  args?: string[];
+  executablePath?: string;
 }
 @singleton()
 export class PuppeteerContext {
@@ -17,8 +19,10 @@ export class PuppeteerContext {
     const config: IPuppeteerConfiguration = this.puppeteerConfiguration || { width: 1366, height: 768 };
     const width: number = config.width || 1366;
     const height: number = config.height || 768;
+    const args: string[] = config.args || [];
+    const executablePath: string = config.executablePath || `/usr/bin/chromium-browser`;
     this.browser = await puppeteer.launch({
-      args: [`--window-size=${width},${height}`],
+      args: [...args, `--window-size=${width},${height}`],
       executablePath: "/usr/bin/chromium-browser",
       headless: false
     });

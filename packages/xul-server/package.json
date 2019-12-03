@@ -16,7 +16,7 @@
   "dependencies": {
     "@xul/core": "0.0.2-rc.17",
     "@xul/express": "0.0.2-rc.4",
-    "@xul/test": "0.0.2-rc.4",
+    "@xul/test": "0.0.2-rc.6",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "globs": "^0.1.4",
