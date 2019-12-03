@@ -1,4 +1,4 @@
-import { ClassLoader } from "@xul/core/lib/ClassLoader";
+import { ClassLoader } from "@xul/express";
 import "./core/mvc/XulServer";
 
 const start = Date.now();
