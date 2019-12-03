@@ -23,7 +23,7 @@ export class PuppeteerContext {
     const executablePath: string = config.executablePath || `/usr/bin/chromium-browser`;
     this.browser = await puppeteer.launch({
       args: [...args, `--window-size=${width},${height}`],
-      executablePath: "/usr/bin/chromium-browser",
+      executablePath,
       headless: false
     });
     context.set("browser", this.browser);

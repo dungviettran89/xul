@@ -1,6 +1,6 @@
 {
   "name": "@xul/test",
-  "version": "0.0.2-rc.6",
+  "version": "0.0.2-rc.7",
   "description": "",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
