@@ -10,13 +10,12 @@ RUN mkdir -p /app/mariadb \
  && axel -n16 https://repo1.maven.org/maven2/ch/vorburger/mariaDB4j/mariaDB4j-app/2.4.0/mariaDB4j-app-2.4.0.jar
 
 ENV PS_INSTALL_AUTO=1 \
- PS_ERASE_DB=1 \
- PS_HANDLE_DYNAMIC_DOMAIN=1 \
-# PS_DOMAIN=demo-shop.janet-and-co.ga\
+ PS_HANDLE_DYNAMIC_DOMAIN=0 \
+ PS_DOMAIN=demo-shop.janet-and-co.ga\
  DB_SERVER=127.0.0.1 \
- DB_USER=presta_demo \
- DB_PASSWD=presta_demo \
- DB_NAME=presta_demo
+ DB_USER=root \
+ DB_PASSWD=root \
+ DB_NAME=test
 
 WORKDIR /app/
 ADD *.sh /app/
