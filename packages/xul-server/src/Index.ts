@@ -1,10 +1,5 @@
-import { ClassLoader } from "@xul/express";
-import "./core/mvc/XulServer";
+import {xulApplication} from "@xul/express";
 
-const start = Date.now();
-ClassLoader.run({
-  onStart: () => {
-    const duration = Date.now() - start;
-    console.log(`Application started after ${duration}ms.`);
-  }
-});
+@xulApplication()
+export class XulApplicationServer {
+}

@@ -1,9 +1,9 @@
 import { autowired, singleton } from "@xul/core";
 import { Request, Response } from "express";
-import { requestMapping } from "../../core/mvc/RequestMapping";
 import { XulEntityManager } from "../../core/persistence/XulEntityManager";
 import { AutomationNode } from "../model/AutomationNode";
 import { NodeService } from "../services/NodeService";
+import {requestMapping} from "@xul/express";
 
 @singleton()
 @requestMapping("/api/node")

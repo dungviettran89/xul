@@ -8,7 +8,7 @@ import proxy from "http-proxy-middleware";
  */
 @singleton()
 export class VncController {
-  @autowired()
+  @autowired(`xul.express.application`)
   public application: Application;
 
   @postConstruct()

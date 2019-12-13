@@ -1,7 +1,7 @@
 import { postConstruct, singleton } from "@xul/core";
 import { lowerCase } from "lodash";
 import mariadb, { Pool, UpsertResult } from "mariadb";
-import { logger } from "../XulLogger";
+import {LOGGER} from "../../server/Logger";
 
 @singleton()
 export class XulEntityManager {
@@ -13,17 +13,17 @@ export class XulEntityManager {
     const database = process.env.db_name || "automation";
     const user = process.env.db_user || "automation";
     const password = process.env.db_password || "automation";
-    logger.info(`XulEntityManager.constructor() url=${host}:${port}/${database}`);
-    logger.info(`XulEntityManager.constructor() user=${user}`);
+    LOGGER.i(`XulEntityManager.constructor() url=${host}:${port}/${database}`);
+    LOGGER.i(`XulEntityManager.constructor() user=${user}`);
     this.pool = mariadb.createPool({ host, port, database, user, password });
   }
 
   @postConstruct(-1)
   public async start() {
-    logger.info(`XulEntityManager.start() `);
+    LOGGER.info(`XulEntityManager.start() `);
     if (entitySchemas) {
       for (const schema of entitySchemas.values()) {
-        logger.info(`Executing ${schema}`);
+        LOGGER.info(`Executing ${schema}`);
         await this.pool.query(schema);
       }
     }
@@ -56,10 +56,10 @@ export class XulEntityManager {
         return `INSERT INTO ${entityTables.get(e.constructor)} (${fields}) VALUES (${inserts}) ON DUPLICATE KEY UPDATE ${updates};`;
       })
       .join("\n");
-    logger.debug(`XulEntityManager.saveAll() sql=${sql}`);
-    logger.debug(`XulEntityManager.saveAll() parameters=${JSON.stringify(parameters)}`);
+    LOGGER.debug(`XulEntityManager.saveAll() sql=${sql}`);
+    LOGGER.debug(`XulEntityManager.saveAll() parameters=${JSON.stringify(parameters)}`);
     let result: UpsertResult[] = await this.pool.batch({ sql, namedPlaceholders: true }, parameters);
-    logger.debug(`XulEntityManager.saveAll() result=${JSON.stringify(result)}`);
+    LOGGER.debug(`XulEntityManager.saveAll() result=${JSON.stringify(result)}`);
     if (!Array.isArray(result)) {
       result = [result as UpsertResult];
     }

@@ -12,7 +12,7 @@ export class NodeService {
   public active: AutomationNode[] = [];
   @autowired()
   public xulEntityManager: XulEntityManager;
-  @autowired()
+  @autowired(`xul.express.port`)
   public applicationPort: number;
 
   constructor() {

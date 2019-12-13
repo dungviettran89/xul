@@ -2,16 +2,16 @@ import { autowired, postConstruct, singleton } from "@xul/core";
 import { Application } from "express";
 import { IncomingMessage } from "http";
 import proxy from "http-proxy-middleware";
-import { logger } from "../../core/XulLogger";
+import { LOGGER } from "../../server/Logger";
 import { NodeService } from "../services/NodeService";
 
 @singleton()
 export class MeshController {
   @autowired()
   public nodeService: NodeService;
-  @autowired()
+  @autowired(`xul.express.application`)
   public application: Application;
-  @autowired()
+  @autowired(`xul.express.port`)
   public applicationPort: number;
 
   @postConstruct()
@@ -20,7 +20,6 @@ export class MeshController {
     this.application.use(
       proxy("/_mesh", {
         changeOrigin: true,
-        logProvider: () => logger,
         pathRewrite: {
           ".*": ""
         },
@@ -37,7 +36,7 @@ export class MeshController {
             return defaultTarget;
           }
           const targetPath = `http://${target.address}:${target.port}/${path}`;
-          logger.info(`MessController.router() Forwarding ${request.url} to ${targetPath}`);
+          LOGGER.info(`MessController.router() Forwarding ${request.url} to ${targetPath}`);
           return targetPath;
         },
         target: "http://127.0.0.1:6080",
