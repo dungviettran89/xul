@@ -1,7 +1,7 @@
 import { postConstruct, singleton } from "@xul/core";
 import { lowerCase } from "lodash";
 import mariadb, { Pool, UpsertResult } from "mariadb";
-import {LOGGER} from "../../server/Logger";
+import { LOGGER } from "../../server/Logger";
 
 @singleton()
 export class XulEntityManager {
