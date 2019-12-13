@@ -1,6 +1,6 @@
 {
   "name": "@xul/express",
-  "version": "0.0.2-rc.4",
+  "version": "0.0.2-rc.6",
   "description": "A simple SpringBOOT-like web framework",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
@@ -41,7 +41,7 @@
     "@types/lodash": "^4.14.147",
     "@types/node": "^12.12.7",
     "@types/node-fetch": "^2.5.4",
-    "@xul/core": "0.0.2-rc.17",
+    "@xul/core": "0.0.2-rc.19",
     "node-fetch": "^2.6.0",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.2",

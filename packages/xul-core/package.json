@@ -1,6 +1,6 @@
 {
   "name": "@xul/core",
-  "version": "0.0.2-rc.17",
+  "version": "0.0.2-rc.19",
   "description": "A simple Spring-like depedencies injection framework",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",

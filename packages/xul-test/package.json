@@ -1,6 +1,6 @@
 {
   "name": "@xul/test",
-  "version": "0.0.2-rc.7",
+  "version": "0.0.2-rc.8",
   "description": "",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
@@ -37,7 +37,7 @@
     "@types/node": "^12.12.14",
     "@types/puppeteer": "^1.20.3",
     "@types/puppeteer-core": "^1.9.0",
-    "@xul/core": "0.0.2-rc.17",
+    "@xul/core": "0.0.2-rc.19",
     "chai": "^4.2.0",
     "cucumber": "^6.0.5",
     "puppeteer-core": "^2.0.0",
