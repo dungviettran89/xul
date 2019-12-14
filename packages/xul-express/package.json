@@ -1,17 +1,16 @@
 {
   "name": "@xul/express",
-  "version": "0.0.2-rc.6",
+  "version": "0.0.1",
   "description": "A simple SpringBOOT-like web framework",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
   "scripts": {
-    "updateDevDependencies": "npm i @xul/core@next && npm up",
     "prebuild": "rimraf lib",
     "build": "tsc --declaration",
     "test": "ts-node test/*.ts",
     "prepublishOnly": "npm run build && npm run test",
-    "release:rc": "npm version prerelease --preid=rc && npm publish --tag=next --access public ",
-    "release": "npm version patch && npm publish --tag=latest  --access public "
+    "release:rc": "npm publish --tag=next --access public ",
+    "release": "npm publish --tag=latest --access public "
   },
   "repository": {
     "type": "git",
@@ -31,7 +30,7 @@
   "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
-    "@xul/core": "0.0.2-rc.20",
+    "@xul/core": "^0.0",
     "express": "^4.17.1",
     "globs": "^0.1.4",
     "lodash": "^4.17.15"

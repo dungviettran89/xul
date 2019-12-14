@@ -1,6 +1,6 @@
 import { autowired, postConstruct, singleton } from "@xul/core";
-import express, {Application, Request, Response} from "express";
-import {requestMapping} from "@xul/express";
+import { requestMapping } from "@xul/express";
+import express, { Application, Request, Response } from "express";
 @singleton()
 @requestMapping("api/test")
 export class StaticFilesController {
@@ -14,7 +14,7 @@ export class StaticFilesController {
   }
 
   @requestMapping("debug")
-  public debug(req:Request,res:Response){
+  public debug(req: Request, res: Response) {
     res.json("OK");
   }
 }

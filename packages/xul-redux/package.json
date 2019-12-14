@@ -1,17 +1,16 @@
 {
   "name": "@xul/redux",
-  "version": "0.0.2-rc.6",
+  "version": "0.0.1",
   "description": "A simple decorator based redux binding",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
   "scripts": {
-    "updateDevDependencies": "npm i @xul/core@next && npm i @xul/express@next -D && npm up",
     "prebuild": "rimraf lib",
     "build": "tsc --declaration",
     "test": "ts-node test/Index.ts",
     "prepublishOnly": "npm run build && npm run test",
-    "release:rc": "npm version prerelease --preid=rc && npm publish --tag=next --access public ",
-    "release": "npm version patch && npm publish --tag=latest  --access public "
+    "release:rc": "npm publish --tag=next --access public ",
+    "release": "npm publish --tag=latest --access public "
   },
   "repository": {
     "type": "git",
@@ -31,13 +30,13 @@
   "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
-    "@xul/core": "0.0.2-rc.20",
+    "@xul/core": "^0.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
-    "@xul/express": "0.0.2-rc.7",
+    "@xul/express": "^0.0",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.2"

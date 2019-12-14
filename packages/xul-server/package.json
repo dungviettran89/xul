@@ -1,10 +1,9 @@
 {
   "name": "@xul/server",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "src/Index.js",
   "scripts": {
-    "updateDevDependencies": "npm i @xul/core@next @xul/express@next @xul/test@next && npm up",
     "clean": "rimraf build",
     "build": "tsc",
     "start": "ts-node src/Index.ts",
@@ -14,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@xul/core": "0.0.2-rc.20",
-    "@xul/express": "0.0.2-rc.7",
-    "@xul/test": "0.0.2-rc.9",
+    "@xul/core": "^0.0",
+    "@xul/express": "^0.0",
+    "@xul/test": "^0.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "globs": "^0.1.4",
