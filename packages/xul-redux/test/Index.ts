@@ -1,5 +1,4 @@
-import {xulApplication} from "@xul/express";
+import { xulApplication } from "@xul/express";
 
 @xulApplication()
-export class ReduxTestApplication {
-}
+export class ReduxTestApplication {}
