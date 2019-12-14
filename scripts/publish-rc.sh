@@ -1,20 +1,36 @@
 #!/bin/bash
 set -e
+export VERSION=${VERSION:-0.0}
+export BUILD_NUMBER=${BUILD_NUMBER:-1}
+export BUILD_VERSION="$VERSION.$BUILD_NUMBER"
+env
+
 cd ..
 export MAIN=$(pwd)
 cd "$MAIN"/packages/xul-core
+npm version "$BUILD_VERSION"
+rm -rf node_modules/ package-lock.json
+npm i
+npm up
 npm run release:rc
 
 cd "$MAIN"/packages/xul-express
-npm run updateDevDependencies
+npm version "$BUILD_VERSION"
+rm -rf node_modules/ package-lock.json
+npm i
+npm up
 npm run release:rc
 
 cd "$MAIN"/packages/xul-test
-npm run updateDevDependencies
+npm version "$BUILD_VERSION"
+rm -rf node_modules/ package-lock.json
+npm i
+npm up
 npm run release:rc
 
-cd "$MAIN"/packages/xul-server
-npm run updateDevDependencies
-
-cd "$MAIN"/packages/xul-ui
-npm run updateDevDependencies
+cd "$MAIN"/packages/xul-redux
+npm version "$BUILD_VERSION"
+rm -rf node_modules/ package-lock.json
+npm i
+npm up
+npm run release:rc

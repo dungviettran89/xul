@@ -9,7 +9,7 @@ do
     cd $(dirname ${PACKAGE_JSON})
     rm -rf node_modules/ package-lock.json
     npm i
-    npm run updateDevDependencies || true
+    npm up
     npm run build
 done
 cd ${MAIN}
