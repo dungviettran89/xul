@@ -31,7 +31,7 @@
   "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
-    "@xul/core": "0.0.2-rc.19",
+    "@xul/core": "0.0.2-rc.20",
     "express": "^4.17.1",
     "globs": "^0.1.4",
     "lodash": "^4.17.15"
