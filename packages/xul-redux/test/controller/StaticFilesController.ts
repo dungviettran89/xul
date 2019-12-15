@@ -4,13 +4,13 @@ import express, { Application, Request, Response } from "express";
 @singleton()
 @requestMapping("api/test")
 export class StaticFilesController {
-  @autowired(`xul.server.application`)
+  @autowired(`xul.express.application`)
   public application: Application;
 
   @postConstruct()
   public async postConstruct() {
-    console.log(`Serving static files in test folder`);
-    this.application.use(express.static("./"));
+    this.application.use(express.static("test"));
+    this.application.use(express.static("node_modules"));
   }
 
   @requestMapping("debug")

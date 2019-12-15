@@ -17,7 +17,7 @@ export class ExpressServer {
   @postConstruct(ExpressServer.ORDER)
   public async start() {
     this.application.listen(this.port, () => {
-      LOGGER.d(`Application server started at http://127.0.0.1:${this.port}/`);
+      LOGGER.i(`Application server started at http://localhost:${this.port}/`);
     });
   }
 }
