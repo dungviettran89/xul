@@ -16,6 +16,8 @@ export class ExpressServer {
 
   @postConstruct(ExpressServer.ORDER)
   public async start() {
+    this.application.use(express.json());
+    this.application.use(express.urlencoded());
     this.application.listen(this.port, () => {
       LOGGER.i(`Application server started at http://localhost:${this.port}/`);
     });
