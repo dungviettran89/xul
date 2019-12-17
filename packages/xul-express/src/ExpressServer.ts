@@ -12,12 +12,12 @@ export class ExpressServer {
     // TODO: This can be improved by ConditionalOnMissingBean
     context.singleton("xul.express.application", this.application);
     context.singleton("xul.express.port", this.port);
+    this.application.use(express.json());
+    this.application.use(express.urlencoded({extended:true}));
   }
 
   @postConstruct(ExpressServer.ORDER)
   public async start() {
-    this.application.use(express.json());
-    this.application.use(express.urlencoded());
     this.application.listen(this.port, () => {
       LOGGER.i(`Application server started at http://localhost:${this.port}/`);
     });
