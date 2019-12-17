@@ -1,5 +1,5 @@
 import { postConstruct, singleton } from "@xul/core";
-import { lowerCase } from "lodash";
+import lowerCase from "lodash/lowerCase";
 import mariadb, { Pool, UpsertResult } from "mariadb";
 import { LOGGER } from "../../server/Logger";
 

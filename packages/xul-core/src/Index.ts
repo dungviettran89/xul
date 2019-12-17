@@ -1,4 +1,3 @@
-export * from "./Autowires";
 export * from "./Context";
 export * from "./InitializingBeans";
 export * from "./SchedulingBeans";

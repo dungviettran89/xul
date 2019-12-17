@@ -1,5 +1,5 @@
 import { context } from "./Context";
-import {LOGGER} from "./Logger";
+import { LOGGER } from "./Logger";
 
 export const singletons: Map<any, any> = new Map();
 export const singleton = (name?: string) => {
@@ -10,13 +10,13 @@ export const singleton = (name?: string) => {
     context.singleton(name, instance);
     singletons.set(beanClass, instance);
     instance.originalConstructor = beanClass;
-    LOGGER.d(`Registered class ${beanClass.name} as singleton name ${name}`)
+    LOGGER.d(`Registered class ${beanClass.name} as singleton name ${name}`);
     beanClass.constructor = () => {
       throw new Error(`${beanClass.name} is singleton.`);
     };
     return beanClass;
   };
 };
-const lowerFirst = (name:string):string=>{
-  return name.substr(0,1).toLowerCase()+name.substr(1);
+const lowerFirst = (name: string): string => {
+  return name.substr(0, 1).toLowerCase() + name.substr(1);
 };

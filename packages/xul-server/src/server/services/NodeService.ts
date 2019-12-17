@@ -1,6 +1,6 @@
 import { autowired, postConstruct, scheduled, singleton } from "@xul/core";
 import { name } from "faker/locale/en_US";
-import { camelCase } from "lodash";
+import camelCase from "lodash/camelCase";
 import md5 from "md5";
 import os from "os";
 import { XulEntityManager } from "../../core/persistence/XulEntityManager";

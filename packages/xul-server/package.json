@@ -15,7 +15,7 @@
   "dependencies": {
     "@xul/core": "^0.0",
     "@xul/data": "^0.0",
-    "@xul/express": "^0.0",
+    "@xul/express": "0.0.12",
     "@xul/test": "^0.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
@@ -35,7 +35,7 @@
     "@types/http-proxy-middleware": "^0.19.3",
     "@types/lodash": "^4.14.149",
     "@types/md5": "^2.1.33",
-    "@types/node": "^12.12.14",
+    "@types/node": "^12.12.19",
     "rimraf": "^3.0.0",
     "ts-node-dev": "^1.0.0-pre.44"
   }

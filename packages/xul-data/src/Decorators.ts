@@ -1,4 +1,4 @@
-import { lowerCase } from "lodash";
+import lowerCase from "lodash/lowerCase";
 
 export const entityTables: Map<any, string> = new Map();
 export const entitySchemas: Map<any, string> = new Map();
