@@ -13,7 +13,7 @@ export class ExpressServer {
     context.singleton("xul.express.application", this.application);
     context.singleton("xul.express.port", this.port);
     this.application.use(express.json());
-    this.application.use(express.urlencoded({extended:true}));
+    this.application.use(express.urlencoded({ extended: true }));
   }
 
   @postConstruct(ExpressServer.ORDER)
