@@ -7,6 +7,7 @@ env
 
 cd ..
 export MAIN=$(pwd)
+
 cd "$MAIN"/packages/xul-core
 npm version "$BUILD_VERSION"
 rm -rf node_modules/ package-lock.json
@@ -14,8 +15,6 @@ npm i
 npm up
 npm run release:rc
 
-cd ..
-export MAIN=$(pwd)
 cd "$MAIN"/packages/xul-data
 npm version "$BUILD_VERSION"
 rm -rf node_modules/ package-lock.json
