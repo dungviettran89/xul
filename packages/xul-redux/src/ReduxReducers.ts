@@ -1,4 +1,4 @@
-import { camelCase, get, set } from "lodash-es";
+import { camelCase, get, set } from "lodash";
 import { LOGGER } from "./Logger";
 import { reduxStore } from "./ReduxStore";
 export interface IReducerOptions {

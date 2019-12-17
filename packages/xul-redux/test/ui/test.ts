@@ -1,17 +1,17 @@
-import {html} from "lit-html";
-import {customElement, LitElement, property} from "lit-element";
-import {reduxStore} from "../../src/ReduxStore";
+import { customElement, LitElement, property } from "lit-element";
+import { html } from "lit-html";
+import { reduxStore } from "../../src/ReduxStore";
 
 @customElement("test-component")
 class TestComponent extends LitElement {
-    @property()
-    heading: string = "test";
+  @property()
+  public heading: string = "test";
 
-    render() {
-        return html`
+  public render() {
+    return html`
       <h2>${this.heading}</h2>
     `;
-    }
+  }
 }
 
 console.log(`reduxStore`, reduxStore);

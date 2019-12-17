@@ -3,7 +3,7 @@ import { LOG, LogLevel } from "../src/log/Log";
 import { LOGGER } from "../src/Logger";
 import "./singleton/Singleton1";
 import "./singleton/Singleton2";
-LOGGER.level = "info";
+LOGGER.level = "debug";
 (async () => {
   await context.initialize();
   await new Promise(r => setTimeout(r, 8000));
