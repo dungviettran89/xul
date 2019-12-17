@@ -9,8 +9,7 @@ export class StaticFilesController {
 
   @postConstruct()
   public async postConstruct() {
-    this.application.use(express.static("test"));
-    this.application.use(express.static("node_modules"));
+    this.application.use(express.static("./"));
   }
 
   @requestMapping("debug")

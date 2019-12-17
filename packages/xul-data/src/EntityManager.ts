@@ -1,7 +1,7 @@
 import { autowired, postConstruct, singleton } from "@xul/core";
 import mariadb, { Pool, UpsertResult } from "mariadb";
-import { LOGGER } from "./Logger";
 import { entityIds, entitySchemas, entityTables } from "./Decorators";
+import { LOGGER } from "./Logger";
 
 @singleton(`xul.data.entityManager`)
 export class EntityManager {
