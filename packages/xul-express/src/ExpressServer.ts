@@ -12,12 +12,13 @@ export class ExpressServer {
     // TODO: This can be improved by ConditionalOnMissingBean
     context.singleton("xul.express.application", this.application);
     context.singleton("xul.express.port", this.port);
-    this.application.use(express.json());
-    this.application.use(express.urlencoded({ extended: true }));
   }
 
   @postConstruct(ExpressServer.ORDER)
   public async start() {
+    // TODO: externalize this config
+    this.application.use(express.json({ limit: "100mb" }));
+    this.application.use(express.urlencoded({ limit: "100mb", extended: true }));
     this.application.listen(this.port, () => {
       LOGGER.i(`Application server started at http://localhost:${this.port}/`);
     });
