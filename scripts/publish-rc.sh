@@ -7,7 +7,7 @@ env
 
 cd ..
 export MAIN=$(pwd)
-sed -i -e "s/next/^$VERSION.$BUILD_NUMBER/g" packages/*/package.json
+sed -i -e "s/\"next\"/\"^$VERSION.$BUILD_NUMBER\"/g" packages/*/package.json
 
 cd "$MAIN"/packages/xul-core
 npm version "$BUILD_VERSION"
