@@ -1,17 +1,17 @@
 import { autowired, postConstruct, scheduled, singleton } from "@xul/core";
+import { EntityManager } from "@xul/data";
 import { name } from "faker/locale/en_US";
 import camelCase from "lodash/camelCase";
 import md5 from "md5";
 import os from "os";
-import { XulEntityManager } from "../../core/persistence/XulEntityManager";
 import { AutomationNode } from "../model/AutomationNode";
 
 @singleton()
 export class NodeService {
   public current: AutomationNode = new AutomationNode();
   public active: AutomationNode[] = [];
-  @autowired()
-  public xulEntityManager: XulEntityManager;
+  @autowired("xul.data.entityManager")
+  public entityManager: EntityManager;
   @autowired(`xul.express.port`)
   public applicationPort: number;
 
@@ -33,12 +33,12 @@ export class NodeService {
 
   @postConstruct()
   public async initialize(): Promise<any> {
-    const oldNode: AutomationNode = await this.xulEntityManager.findOne(AutomationNode, this.current.id);
+    const oldNode: AutomationNode = await this.entityManager.findOne(AutomationNode, this.current.id);
     if (oldNode) {
       this.current.friendlyName = oldNode.friendlyName;
     }
     await this.updateActiveNode();
-    return await this.xulEntityManager.save(this.current);
+    return await this.entityManager.save(this.current);
   }
 
   @scheduled({ interval: 60000 })
@@ -47,11 +47,11 @@ export class NodeService {
       this.current.status = "ready";
     }
     this.current.updated = Date.now();
-    await this.xulEntityManager.save(this.current);
+    await this.entityManager.save(this.current);
     return await this.updateActiveNode();
   }
 
   private async updateActiveNode(): Promise<any> {
-    this.active = await this.xulEntityManager.findBy(AutomationNode, " updated > ?", Date.now() - 60 * 1000);
+    this.active = await this.entityManager.findBy(AutomationNode, " updated > ?", Date.now() - 60 * 1000);
   }
 }

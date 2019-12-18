@@ -30,7 +30,7 @@
   "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
-    "@xul/core": "^0.0",
+    "@xul/core": "next",
     "lodash": "^4.17.15",
     "mariadb": "^2.1.4"
   },

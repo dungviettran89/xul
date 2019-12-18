@@ -3,7 +3,7 @@ import { Settings } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import React from "react";
 import "./App.css";
-
+import "./service/NodeService";
 const App: React.FC = () => {
   const classes = makeStyles(theme => ({
     menuButton: {

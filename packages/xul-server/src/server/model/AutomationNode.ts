@@ -1,5 +1,5 @@
-import { entity } from "../../core/persistence/XulEntityManager";
-import { id } from "../../core/persistence/XulEntityManager";
+import { entity } from "@xul/data";
+import { id } from "@xul/data";
 
 export type NodeStatus = "initializing" | "ready" | "busy";
 

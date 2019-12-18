@@ -1,5 +1,5 @@
-import {LOGGER} from "./Logger";
-import {safeInvoke} from "./Utils";
+import { LOGGER } from "./Logger";
+import { safeInvoke } from "./Utils";
 
 export interface IAutowireOption {
   name?: string;
@@ -9,7 +9,7 @@ export interface IAutowireOption {
 export const autowires: Map<any, IAutowireOption[]> = new Map();
 export const autowired = (option?: string | IAutowireOption): any => {
   return (bean: any, method?: any, descriptor?: any): any => {
-    const autowireOption: IAutowireOption = typeof option === "string" ? {name: option, required: true} : option || {};
+    const autowireOption: IAutowireOption = typeof option === "string" ? { name: option, required: true } : option || {};
     autowireOption.name = autowireOption.name || method;
     autowireOption.required = autowireOption.required !== undefined ? autowireOption.required : true;
     if (!autowires.has(bean)) {

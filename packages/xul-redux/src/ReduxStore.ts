@@ -6,10 +6,12 @@ export type Reducer = (s: any, a: any) => any;
 
 @singleton(`xul.redux.reduxStore`)
 export class ReduxStore {
-  public store: any = createStore(this.reduce.bind(this), applyMiddleware(thunk));
-  public reducers: Map<string, Reducer[]> = new Map();
+  public reducers: Map<string, Reducer[]>;
+  public store: any;
 
   constructor() {
+    this.reducers = new Map();
+    this.store = createStore(this.reduce.bind(this), applyMiddleware(thunk));
     context.singleton(`xul.redux.store`, this.store);
   }
 
