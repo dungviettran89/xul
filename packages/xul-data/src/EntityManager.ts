@@ -24,31 +24,31 @@ export class EntityManager {
   }
 
   public async saveAll<T>(entities: T[]): Promise<number> {
+    if (entities === null || entities.length === 0) {
+      return 0;
+    }
     let i: number = 0;
     const parameters: any = {};
-    const sql = entities
-      .map((e: any) => {
-        const fields: string = Object.keys(e).join(",");
-        const inserts: string = Object.keys(e)
+    const inserts = entities
+      .map((e: any) =>
+        Object.keys(e)
           .map(k => {
             const parameterName = `p${i++}`;
             parameters[parameterName] = e[k];
             return `:${parameterName}`;
           })
-          .join(",");
-        const updates: string = Object.keys(e)
-          .map(k => {
-            const parameterName = `p${i++}`;
-            parameters[parameterName] = e[k];
-            return `${k}=:${parameterName}`;
-          })
-          .join(",");
-        return `INSERT INTO ${entityTables.get(e.constructor)} (${fields}) VALUES (${inserts}) ON DUPLICATE KEY UPDATE ${updates};`;
-      })
-      .join("\n");
-    LOGGER.debug(`EntityManager.saveAll() sql=${sql}`);
-    LOGGER.debug(`EntityManager.saveAll() parameters=${JSON.stringify(parameters)}`);
-    let result: UpsertResult[] = await this.pool.batch({ sql, namedPlaceholders: true }, parameters);
+          .join(",")
+      )
+      .map(insert => `(${insert})`)
+      .join(",");
+    const entity = entities[0];
+    const fields: string = Object.keys(entity).join(",");
+    const updates: string = Object.keys(entity)
+      .map(k => `${k}=VALUES(${k})`)
+      .join(",");
+    const sql = `INSERT INTO ${entityTables.get(entity.constructor)} (${fields}) VALUES ${inserts} ON DUPLICATE KEY UPDATE ${updates};`;
+    LOGGER.d(`EntityManager.saveAll() sql=${sql}`);
+    let result: UpsertResult[] = await this.pool.query({ sql, namedPlaceholders: true }, parameters);
     LOGGER.debug(`EntityManager.saveAll() result=${JSON.stringify(result)}`);
     if (!Array.isArray(result)) {
       result = [result as UpsertResult];
