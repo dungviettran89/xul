@@ -36,15 +36,16 @@ export const reduce = (typeOrOptions: string | IReducerOptions) => {
     return descriptor;
   };
 };
-const get = (obj:any, path:string, defaultValue?:any) => {
-  const result = String.prototype.split.call(path, /[,[\].]+?/)
-      .filter(Boolean)
-      .reduce((res:string, key:number) => (res !== null && res !== undefined) ? res[key] : res, obj);
-  return (result === undefined || result === obj) ? defaultValue : result;
+const get = (obj: any, path: string, defaultValue?: any) => {
+  const result = String.prototype.split
+    .call(path, /[,[\].]+?/)
+    .filter(Boolean)
+    .reduce((res: string, key: number) => (res !== null && res !== undefined ? res[key] : res), obj);
+  return result === undefined || result === obj ? defaultValue : result;
 };
 const lowerFirst = (name: string): string => {
   return name.substr(0, 1).toLowerCase() + name.substr(1);
 };
-const set=(target:any,path:string,value:any)=>{
+const set = (target: any, path: string, value: any) => {
   return target;
 };
