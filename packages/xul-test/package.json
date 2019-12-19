@@ -9,6 +9,7 @@
     "build": "tsc --declaration",
     "cucumber": "cucumber-js --require-module ts-node/register --require 'test/steps/*.ts'",
     "test": "npm run cucumber -- 'test/features/*.feature'",
+    "test:no-headless": "XUL_HEADLESS=false npm run cucumber -- 'test/features/*.feature'",
     "prepublishOnly": "npm run build",
     "release:rc": "npm publish --tag=next --access public ",
     "release": "npm publish --tag=latest  --access public "

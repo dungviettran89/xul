@@ -12,19 +12,20 @@ export interface IPuppeteerConfiguration {
 export class PuppeteerContext {
   public browser: Browser;
   public page: Page;
-  @autowired()
+  @autowired({ required: false })
   public puppeteerConfiguration: IPuppeteerConfiguration;
 
   public async before() {
     const config: IPuppeteerConfiguration = this.puppeteerConfiguration || { width: 1366, height: 768 };
-    const width: number = config.width || 1366;
-    const height: number = config.height || 768;
-    const args: string[] = config.args || [];
-    const executablePath: string = config.executablePath || `/usr/bin/chromium-browser`;
+    const width: number = config.width ?? 1366;
+    const height: number = config.height ?? 768;
+    const args: string[] = config.args ?? [];
+    const executablePath: string = config.executablePath ?? `/usr/bin/chromium-browser`;
+    const headless = (process.env.XUL_HEADLESS ?? `true`) === `true`;
     this.browser = await puppeteer.launch({
       args: [...args, `--window-size=${width},${height}`],
       executablePath,
-      headless: false
+      headless
     });
     context.set("browser", this.browser);
     this.page = await this.browser.newPage();

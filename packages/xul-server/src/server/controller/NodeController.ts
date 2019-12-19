@@ -3,7 +3,7 @@ import { EntityManager } from "@xul/data";
 import { requestMapping } from "@xul/express";
 import { Request, Response } from "express";
 import { AutomationNode } from "../model/AutomationNode";
-import { NodeService } from "../services/NodeService";
+import { NodeService } from "../service/NodeService";
 
 @singleton()
 @requestMapping("/api/node")

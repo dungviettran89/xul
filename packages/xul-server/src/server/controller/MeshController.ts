@@ -3,7 +3,7 @@ import { Application } from "express";
 import { IncomingMessage } from "http";
 import proxy from "http-proxy-middleware";
 import { LOGGER } from "../../server/Logger";
-import { NodeService } from "../services/NodeService";
+import { NodeService } from "../service/NodeService";
 
 @singleton()
 export class MeshController {
