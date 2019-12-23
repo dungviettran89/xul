@@ -15,7 +15,7 @@ export class ReduxActions {
     this.actions.get(type).push(actionToAdd);
   }
 }
-export const action = (typeOrOptions: string | IActionOptions) => {
+export const action = (typeOrOptions?: string | IActionOptions) => {
   return (beanOrClass: any, name?: string, descriptor?: any) => {
     let options: IActionOptions = typeof typeOrOptions === "string" ? { type: typeOrOptions } : typeOrOptions;
     options = options || { type: `${beanOrClass.constructor.name}.${name}` };

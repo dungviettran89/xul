@@ -1,5 +1,6 @@
 import { context } from "./Context";
 import { LOGGER } from "./Logger";
+import { lowerFirst } from "./Utils";
 
 export const singletons: Map<any, any> = new Map();
 export const singleton = (name?: string) => {
@@ -16,7 +17,4 @@ export const singleton = (name?: string) => {
     };
     return beanClass;
   };
-};
-const lowerFirst = (name: string): string => {
-  return name.substr(0, 1).toLowerCase() + name.substr(1);
 };

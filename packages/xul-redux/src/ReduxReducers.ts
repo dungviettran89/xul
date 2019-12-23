@@ -1,11 +1,12 @@
 import { LOGGER } from "./Logger";
 import { reduxStore } from "./ReduxStore";
+import { get, lowerFirst } from "./Utils";
 export interface IReducerOptions {
   type: string;
   absolute?: boolean;
 }
 
-export const reduce = (typeOrOptions: string | IReducerOptions) => {
+export const reduce = (typeOrOptions?: string | IReducerOptions) => {
   return (beanOrClass: any, name?: string, descriptor?: any) => {
     let options: IReducerOptions = typeof typeOrOptions === "string" ? { type: typeOrOptions } : typeOrOptions;
     options = options || { type: `${beanOrClass.constructor.name}.${lowerFirst(name.substr(2))}` };
@@ -36,16 +37,7 @@ export const reduce = (typeOrOptions: string | IReducerOptions) => {
     return descriptor;
   };
 };
-const get = (obj: any, path: string, defaultValue?: any) => {
-  const result = String.prototype.split
-    .call(path, /[,[\].]+?/)
-    .filter(Boolean)
-    .reduce((res: string, key: number) => (res !== null && res !== undefined ? res[key] : res), obj);
-  return result === undefined || result === obj ? defaultValue : result;
-};
-const lowerFirst = (name: string): string => {
-  return name.substr(0, 1).toLowerCase() + name.substr(1);
-};
+
 const set = (target: any, path: string, value: any) => {
   return target;
 };

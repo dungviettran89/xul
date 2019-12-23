@@ -1,12 +1,3 @@
-export const safeInvoke = async (callable?: () => any): Promise<void> => {
-  if (callable === undefined) {
-    return;
-  }
-  const promiseLike: Promise<any> = Promise.resolve(callable());
-  if (promiseLike) {
-    await promiseLike;
-  }
-};
 export const get = (obj: any, path: string, defaultValue?: any): any => {
   const result = String.prototype.split
     .call(path, /[,[\].]+?/)
