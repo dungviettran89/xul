@@ -1,21 +1,26 @@
 import { customElement, LitElement, property } from "lit-element";
 import { html } from "lit-html";
-import { reduxStore } from "../../src/ReduxStore";
+import { litState, state } from "../../src/Index";
+import { LOGGER } from "../../src/Logger";
+import { testService } from "./TestService";
+
+LOGGER.level = "debug";
 
 @customElement("test-component")
+@litState()
 class TestComponent extends LitElement {
+  @state(`value`, 0)
   @property()
-  public heading: string = "test";
+  public value: number;
 
   public render() {
     return html`
-      <h2>${this.heading}</h2>
+      <h2>${this.value}</h2>
+      <button @click=${e => testService.increase(this.value)}>Click me</button>
     `;
   }
 }
 
-console.log(`reduxStore`, reduxStore);
-export default TestComponent;
 document.getElementById("app").innerHTML = `
 <test-component heading="Hello world"></test-component>
 `;
