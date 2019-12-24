@@ -1,6 +1,6 @@
+import { get, lowerFirst } from "@xul/core";
 import { LOGGER } from "./Logger";
 import { reduxStore } from "./ReduxStore";
-import { get, lowerFirst } from "./Utils";
 export interface IReducerOptions {
   type: string;
   absolute?: boolean;

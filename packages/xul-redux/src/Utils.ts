@@ -1,10 +1,19 @@
-export const get = (obj: any, path: string, defaultValue?: any): any => {
-  const result = String.prototype.split
-    .call(path, /[,[\].]+?/)
-    .filter(Boolean)
-    .reduce((res: any, key: any) => (res !== null && res !== undefined ? res[key] : res), obj);
-  return result === undefined || result === obj ? defaultValue : result;
-};
-export const lowerFirst = (name: string): string => {
-  return name.substr(0, 1).toLowerCase() + name.substr(1);
+export const delay = (func: () => void, wait: number): ((immediate: boolean) => void) => {
+  let timeout: any;
+  return (immediate: boolean) => {
+    // Invoke now if needed
+    if (immediate) {
+      clearTimeout(timeout);
+      timeout = undefined;
+      return func();
+    }
+    // Ignore subsequence call
+    if (timeout) {
+      return;
+    }
+    timeout = setTimeout(() => {
+      timeout = undefined;
+      func();
+    }, wait);
+  };
 };

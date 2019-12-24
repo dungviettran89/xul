@@ -9,14 +9,20 @@ LOGGER.level = "debug";
 @customElement("test-component")
 @litState()
 class TestComponent extends LitElement {
-  @state(`value`, 0)
+  @state(`local.value`, 0)
   @property()
-  public value: number;
+  public localValue: number;
+
+  @state(`session.value`, 0)
+  @property()
+  public sessionValue: number;
 
   public render() {
     return html`
-      <h2>${this.value}</h2>
-      <button @click=${e => testService.increase(this.value)}>Click me</button>
+      <h2>Local ${this.localValue}</h2>
+      <button @click=${e => testService.increase(this.localValue)}>Click me</button>
+      <h2>Session ${this.sessionValue}</h2>
+      <button @click=${e => testService.increaseSession(this.sessionValue)}>Click me</button>
     `;
   }
 }

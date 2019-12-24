@@ -6,3 +6,4 @@ export * from "./LitElementBindings";
 export * from "./ReactBindings";
 export * from "./ReactBindings";
 export * from "./LitElementBindings";
+export { delay } from "./Utils";
