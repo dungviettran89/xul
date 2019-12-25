@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>Redux test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.7.0/polyfill.min.js"></script>
     <script src="../node_modules/brewquire/brewquire.js"></script>
   </head>
   <body>
     <div id="app"></div>
     <script>
       process = { env: "dev" };
-      brewquire("./ui/test", { packageLock: "../package-lock.json" });
+      brewquire("./ui/test", { packageLock: "../package-lock.json" }).then(({ context }) => context.initialize());
     </script>
   </body>
 </html>

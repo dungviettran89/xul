@@ -16,7 +16,7 @@ export const reduce = (typeOrOptions?: string | IReducerOptions) => {
     reduxStore.addReducer(type, (state, action) => {
       if (absolute !== true && beanOrClass.constructor.statePrefix) {
         let prefix = beanOrClass.constructor.statePrefix;
-        let match = /\$([a-zA-Z]+)/g.exec(prefix);
+        let match = /\$([a-zA-Z0-9]+)/g.exec(prefix);
         while (match) {
           const portion = match[0];
           const field = match[1];

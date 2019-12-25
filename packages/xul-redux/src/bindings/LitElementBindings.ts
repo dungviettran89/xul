@@ -1,5 +1,5 @@
-import { LOGGER } from "./Logger";
-import { createRedux } from "./ReduxState";
+import { LOGGER } from "../Logger";
+import { createRedux } from "../ReduxState";
 
 export const litState = createRedux((clazz: any, start: (stateChanged: () => void) => void, stop: () => void): any => {
   return class extends clazz {

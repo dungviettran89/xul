@@ -30,8 +30,11 @@
   "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
+    "@types/lz-string": "^1.3.33",
     "@xul/core": "next",
+    "lz-string": "^1.4.4",
     "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {

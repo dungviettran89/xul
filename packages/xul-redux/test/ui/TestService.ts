@@ -15,20 +15,30 @@ export class TestService {
   public onIncrease(state: any, { value }: { value: number }) {
     const { local } = state;
     const newState = { ...state, local: { ...local, value } };
-    LOGGER.i(`state:`, state);
     return newState;
   }
 
   @action()
   public increaseSession(value: number) {
-    return this.increase(value);
+    return { value: (value ?? 0) + 1 };
   }
 
   @reduce()
   public onIncreaseSession(state: any, { value }: { value: number }) {
     const { session } = state;
     const newState = { ...state, session: { ...session, value } };
-    LOGGER.i(`state:`, state);
+    return newState;
+  }
+
+  @action()
+  public increaseHash(value: number) {
+    return { value: (value ?? 0) + 1 };
+  }
+
+  @reduce()
+  public onIncreaseHash(state: any, { value }: { value: number }) {
+    const { hash } = state;
+    const newState = { ...state, hash: { ...hash, value } };
     return newState;
   }
 }
