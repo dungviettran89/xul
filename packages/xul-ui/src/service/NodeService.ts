@@ -1,8 +1,18 @@
-import { autowired, singleton } from "@xul/core";
-import { ReduxStore } from "@xul/redux";
+import { singleton, singletons } from "@xul/core";
+import { action, reduce } from "@xul/redux";
 
 @singleton()
 export class NodeService {
-  @autowired("xul.redux.reduxStore")
-  private reduxStore: ReduxStore;
+  @action()
+  public click(clicked: number) {
+    return { clicked: (clicked ?? 0) + 1 };
+  }
+
+  @reduce()
+  public onClick(state: any, { clicked }: { clicked: number }) {
+    const { hash } = state;
+    return { ...state, hash: { ...hash, clicked } };
+  }
 }
+
+export const nodeService: NodeService = singletons.get(NodeService);

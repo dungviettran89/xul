@@ -2,9 +2,9 @@ export const safeInvoke = async (callable?: () => any): Promise<void> => {
   if (callable === undefined) {
     return;
   }
-  const promiseLike: Promise<any> = Promise.resolve(callable());
-  if (promiseLike) {
-    await promiseLike;
+  const called: any = callable();
+  if (called && typeof called.then === "function") {
+    await (called as Promise<any>);
   }
 };
 export const get = (obj: any, path: string, defaultValue?: any): any => {
