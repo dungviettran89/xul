@@ -9,13 +9,17 @@ export const reactState = createRedux((clazz: any, start: (stateChanged: () => v
         LOGGER.d(`stateChanged() invoked. `);
         this.setState(this);
       });
-      super.componentDidMount();
+      if (typeof super.componentDidMount === "function") {
+        super.componentDidMount();
+      }
     }
 
     public componentWillUnmount() {
       LOGGER.d(`componentWillUnmount() invoked`);
       stop();
-      super.componentWillUnmount();
+      if (typeof super.componentWillUnmount === "function") {
+        super.componentWillUnmount();
+      }
     }
   };
 });

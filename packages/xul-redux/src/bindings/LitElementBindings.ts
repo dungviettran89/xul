@@ -9,13 +9,17 @@ export const litState = createRedux((clazz: any, start: (stateChanged: () => voi
         LOGGER.d(`stateChanged() invoked. `);
         this.requestUpdate();
       });
-      super.connectedCallback();
+      if (typeof super.connectedCallback === "function") {
+        super.connectedCallback();
+      }
     }
 
     public disconnectedCallback() {
       LOGGER.d(`disconnectedCallback() invoked`);
       stop();
-      super.disconnectedCallback();
+      if (typeof super.disconnectedCallback === "function") {
+        super.disconnectedCallback();
+      }
     }
   };
 });
