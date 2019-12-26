@@ -1,17 +1,26 @@
 #!/bin/bash
-export WIDTH=1920
-export HEIGHT=1080
-export NOVNC_PORT=6080
-export VNC_PORT=5900
-export RESOLUTION="${WIDTH}x${HEIGHT}x24"
+export WIDTH=${WIDTH:-1400}
+export HEIGHT=${HEIGHT:-700}
+export NOVNC_PORT=${NOVNC_PORT:-6080}
+export VNC_PORT=${VNC_PORT:-5900}
+export VNC_PASSWORD=${VNC_PASSWORD:-demo}
+export LANG=${LANG:-en_GB.UTF-8}
 export DISPLAY=:99
-export HOME=/home/headless
+echo "WIDTH=${WIDTH}"
+echo "HEIGHT=${HEIGHT}"
+echo "NOVNC_PORT=${NOVNC_PORT}"
+echo "VNC_PORT=${VNC_PORT}"
+echo "VNC_PASSWORD=${VNC_PASSWORD}"
+echo "LANG=${LANG}"
 
-/usr/bin/Xvfb :99 -screen 0 ${RESOLUTION} > /tmp/xvfb.log & disown
-sleep 2s
-/usr/bin/x11vnc -rfbport 5900 -bg -xkb -noxrecord -noxfixes -noxdamage -display :99 -wait 5 -shared -forever > /tmp/x11vnc.log & disown
-/vnc/novnc/utils/launch.sh --listen 6080 --vnc localhost:5900 > /tmp/novnc_server.log & disown
+keepAlive() {
+    while true; do
+        $@;
+        sleep 10s;
+    done
+}
 
-export HOME=/home/headless
-cd xul-server
-npm run start
+/usr/bin/Xvfb :99 -screen 0 "${WIDTH}x${HEIGHT}x24" &
+sleep 3s; keepAlive /usr/bin/x11vnc -rfbport "${VNC_PORT}" -passwd "${VNC_PASSWORD}" -xkb -noxrecord -noxfixes -noxdamage -display :99 -nevershared -forever &
+sleep 3s; keepAlive /app/novnc/utils/launch.sh --listen ${NOVNC_PORT} --vnc localhost:${VNC_PORT} &
+sleep 3s; cd xul-server; npm run start

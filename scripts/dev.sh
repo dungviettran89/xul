@@ -20,6 +20,6 @@ docker build -f docker/xul-server/xul-server.dockerfile -t xul-server:dev .
 
 export SHARED_PARAMS=" -e db_host=xul-database --network=xul-network "
 docker run ${SHARED_PARAMS} --name xul-server-2 xul-server:dev &
-docker run ${SHARED_PARAMS} --name xul-server-1 -p 6080:6080 -p 8080:8080 xul-server:dev &
+docker run ${SHARED_PARAMS} --name xul-server-1 -p 8080:8080 xul-server:dev &
 sleep 30m
 docker rm -f xul-server-1 xul-server-2  || true
