@@ -1,20 +1,19 @@
-import { reactState, state } from "@xul/redux";
+import { Box, createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { enableHashStateStore } from "@xul/redux/lib/store/HashStateStore";
+import { enableSessionStateStore } from "@xul/redux/lib/store/SessionStateStore";
 import React, { Component } from "react";
-import { nodeService } from "../service/NodeService";
-
+import { ApplicationHeader } from "./ApplicationHeader";
 @enableHashStateStore()
-@reactState(`hash`)
+@enableSessionStateStore()
 export class Application extends Component {
-  @state(`clicked`, 0)
-  public clicked: number;
   public render() {
     return (
-      <div>
-        <h1>Hello world</h1>
-        <h3>{this.clicked}</h3>
-        <button onClick={e => nodeService.click(this.clicked)}>Click me</button>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Box>
+          <ApplicationHeader />
+        </Box>
+      </ThemeProvider>
     );
   }
 }
+export const theme = createMuiTheme();

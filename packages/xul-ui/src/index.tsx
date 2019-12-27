@@ -1,4 +1,5 @@
 import { context } from "@xul/core";
+import "material-icons/iconfont/material-icons.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import "typeface-roboto";
