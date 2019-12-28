@@ -7,6 +7,7 @@ export interface ITabConfig {
   name: string;
   type: string;
   icon?: any;
+  default?: boolean;
 }
 
 @singleton()
@@ -27,13 +28,16 @@ export class TabController {
     }
     return 0;
   }
-
+  public getDefaultTabs(): ITabConfig[] {
+    return [
+      { id: "home", name: "Home", type: "home", icon: "home" },
+      { id: "agent", name: "Agent", type: "agent", icon: "computer" },
+      { id: "scenario", name: "Scenario", type: "scenario", icon: "book" },
+      { id: "report", name: "Report", type: "report", icon: "assignment_turned_in" }
+    ].map(t => ({ ...t, default: true }));
+  }
   public getTabs(): ITabConfig[] {
-    const home = { id: "home", name: "Home", type: "home", icon: "home" };
-    const agent = { id: "agent", name: "Agent", type: "agent", icon: "computer" };
-    const scenario = { id: "scenario", name: "Scenario", type: "scenario", icon: "book" };
-    const report = { id: "report", name: "Report", type: "report", icon: "assignment_turned_in" };
-    return [home, agent,scenario,report, ...this.tabs];
+    return [...this.getDefaultTabs(), ...this.tabs];
   }
 
   @action()
