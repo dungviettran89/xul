@@ -1,4 +1,4 @@
-import { singleton } from "../../src/Index";
+import { singleton, singletons } from "../../src/Index";
 import { LOG } from "../../src/log/Log";
 import { scheduled } from "../../src/SchedulingBeans";
 import { AbstractSingleton } from "./AbstractSingleton";
@@ -10,3 +10,4 @@ export class Singleton1 extends AbstractSingleton {
     LOG.i(this, `Tick ${new Date()}`);
   }
 }
+export const singleton1 = singletons.get(Singleton1);

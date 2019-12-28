@@ -1,4 +1,4 @@
-import { singleton } from "@xul/core";
+import { singleton, singletons } from "@xul/core";
 import { LOGGER } from "../Logger";
 import { IStateStore, stateStore, StateStore } from "./StateStore";
 
@@ -6,7 +6,7 @@ import { IStateStore, stateStore, StateStore } from "./StateStore";
 export class SessionStateStore implements IStateStore {
   public prefix: string = "session";
 
-  constructor() {
+  public register() {
     stateStore.register(this);
   }
 
@@ -21,5 +21,6 @@ export class SessionStateStore implements IStateStore {
 
 export const enableSessionStateStore = () => (beanOrClass: any, method?: string, descriptor?: any) => {
   LOGGER.d(`Enabled session state store.`);
+  singletons.get(SessionStateStore).register();
   return descriptor ?? beanOrClass;
 };

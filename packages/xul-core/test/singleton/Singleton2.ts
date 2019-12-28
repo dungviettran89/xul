@@ -1,4 +1,4 @@
-import { autowired, postConstruct, singleton } from "../../src/Index";
+import { autowired, postConstruct, singleton, singletons } from "../../src/Index";
 import { LOG } from "../../src/log/Log";
 import { AbstractSingleton } from "./AbstractSingleton";
 import { Singleton1 } from "./Singleton1";
@@ -16,3 +16,4 @@ class Singleton2 extends AbstractSingleton {
     LOG.i(this, `singleton2 started successfully.`);
   }
 }
+export const singleton2 = singletons.get(Singleton2);

@@ -1,6 +1,5 @@
 import { singleton, singletons } from "@xul/core";
-import { action, reduce, state } from "@xul/redux";
-import { noopState } from "./NoopState";
+import { action, noopState, reduce, state } from "@xul/redux";
 
 @singleton()
 @noopState(`session.drawer`)

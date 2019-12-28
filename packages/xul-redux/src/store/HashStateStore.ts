@@ -1,4 +1,4 @@
-import { singleton } from "@xul/core";
+import { singleton, singletons } from "@xul/core";
 import { compressToBase64, decompressFromBase64 } from "lz-string";
 import { LOGGER } from "../Logger";
 import { IStateStore, stateStore, StateStore } from "./StateStore";
@@ -7,7 +7,7 @@ import { IStateStore, stateStore, StateStore } from "./StateStore";
 export class HashStateStore implements IStateStore {
   public prefix: string = "hash";
 
-  constructor() {
+  public register() {
     stateStore.register(this);
   }
 
@@ -22,5 +22,6 @@ export class HashStateStore implements IStateStore {
 
 export const enableHashStateStore = () => (beanOrClass: any, method?: string, descriptor?: any) => {
   LOGGER.d(`Enabled hash state store.`);
+  singletons.get(HashStateStore).register();
   return descriptor ?? beanOrClass;
 };

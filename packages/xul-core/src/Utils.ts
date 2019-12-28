@@ -11,6 +11,9 @@ export const safeInvoke = async (callable?: () => any): Promise<void> => {
 };
 
 export const lowerFirst = (name: string): string => {
+  if (!name) {
+    return name;
+  }
   return name.substr(0, 1).toLowerCase() + name.substr(1);
 };
 export const debounce = (func: any, wait: number, immediate: boolean = false) => {
@@ -50,7 +53,7 @@ export const delay = (func: () => void, wait: number) => {
 };
 export const get = (source: any, path: string | string[], defaultValue?: any): any => {
   LOGGER.d(`get(${JSON.stringify(source)},${JSON.stringify(path)},${JSON.stringify(path)}) `);
-  if (source === undefined || path === undefined || path === "") {
+  if (!source || !path) {
     return source || defaultValue;
   }
   // split path by .
@@ -72,10 +75,10 @@ export const assign = <T>(target: T, path: string | string[], value: any): T => 
   const paths: string[] = path as string[];
   // exit condition
   if (paths === null || paths.length === 0) {
-    return Object.assign({}, target, value);
+    return value;
   }
   const source: any = {};
   const field: string = paths[0];
-  source[field] = assign((target as any)[field], paths.splice(1), value);
+  source[field] = assign(get(target, field), paths.splice(1), value);
   return Object.assign({}, target, source);
 };

@@ -5,3 +5,7 @@ export * from "./ReduxState";
 export * from "./bindings/ReactState";
 export * from "./bindings/LitState";
 export * from "./bindings/NoopState";
+export * from "./store/SessionStateStore";
+export * from "./store/LocalStateStore";
+export * from "./store/HashStateStore";
+export * from "./store/StateStore";
