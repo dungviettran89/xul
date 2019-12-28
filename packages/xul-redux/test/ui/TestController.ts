@@ -3,7 +3,7 @@ import { action, reduce } from "../../src/Index";
 import { LOGGER } from "../../src/Logger";
 
 @singleton()
-export class TestService {
+export class TestController {
   @action()
   public increase(value: number) {
     value = value ?? 0;
@@ -14,8 +14,7 @@ export class TestService {
   @reduce()
   public onIncrease(state: any, { value }: { value: number }) {
     const { local } = state;
-    const newState = { ...state, local: { ...local, value } };
-    return newState;
+    return { ...state, local: { ...local, value } };
   }
 
   @action()
@@ -42,4 +41,4 @@ export class TestService {
     return newState;
   }
 }
-export const testService: TestService = singletons.get(TestService);
+export const testController: TestController = singletons.get(TestController);

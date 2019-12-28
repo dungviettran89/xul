@@ -5,9 +5,9 @@ import { LOGGER } from "../../src/Logger";
 import { enableHashStateStore } from "../../src/store/HashStateStore";
 import { enableLocalStateStore } from "../../src/store/LocalStateStore";
 import { enableSessionStateStore } from "../../src/store/SessionStateStore";
-import { testService } from "./TestService";
+import { testController } from "./TestController";
 export { context } from "@xul/core";
-
+import { scopedController, ScopedController } from "./ScopedController";
 LOGGER.level = "debug";
 @enableHashStateStore()
 @enableLocalStateStore()
@@ -30,11 +30,13 @@ class TestComponent extends LitElement {
   public render() {
     return html`
       <h2>Local ${this.localValue}</h2>
-      <button @click=${e => testService.increase(this.localValue)}>Click me</button>
+      <button @click=${e => testController.increase(this.localValue)}>Click me</button>
       <h2>Session ${this.sessionValue}</h2>
-      <button @click=${e => testService.increaseSession(this.sessionValue)}>Click me</button>
+      <button @click=${e => testController.increaseSession(this.sessionValue)}>Click me</button>
       <h2>Hash ${this.hashValue}</h2>
-      <button @click=${e => testService.increaseHash(this.hashValue)}>Click me</button>
+      <button @click=${e => testController.increaseHash(this.hashValue)}>Click me</button>
+      <h2>Scoped Hash ${scopedController.value}</h2>
+      <button @click=${e => scopedController.increase()}>Click me</button>
     `;
   }
 }

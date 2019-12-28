@@ -1,8 +1,12 @@
-import { get, lowerFirst } from "@xul/core";
+import { lowerFirst } from "@xul/core";
 import { LOGGER } from "./Logger";
+import { statePrefixes } from "./ReduxState";
 import { reduxStore } from "./ReduxStore";
+import { assign, get } from "./Utils";
+
 export interface IReducerOptions {
   type: string;
+  prefix?: string;
   absolute?: boolean;
 }
 
@@ -14,30 +18,31 @@ export const reduce = (typeOrOptions?: string | IReducerOptions) => {
     const { type, absolute } = options;
     const reducerFunction = descriptor.value.bind(beanOrClass);
     reduxStore.addReducer(type, (state, action) => {
-      if (absolute !== true && beanOrClass.constructor.statePrefix) {
-        let prefix = beanOrClass.constructor.statePrefix;
-        let match = /\$([a-zA-Z0-9]+)/g.exec(prefix);
-        while (match) {
-          const portion = match[0];
-          const field = match[1];
-          if (field in action) {
-            prefix = prefix.replace(portion, action[field]);
-          } else {
-            throw new Error(`Can not find field ${field} in ${action.type}`);
-          }
-          match = /\$([a-zA-Z]+)/g.exec(prefix);
+      let prefix = options.prefix || "";
+      const classOptions = statePrefixes.get(beanOrClass.constructor);
+      if (!options.absolute && classOptions && classOptions.prefix) {
+        prefix = [classOptions.prefix, options.prefix].filter(Boolean).join(".");
+      }
+      let match = /\$([a-zA-Z0-9]+)/g.exec(prefix);
+      while (match) {
+        const portion = match[0];
+        const field = match[1];
+        if (field in action) {
+          prefix = prefix.replace(portion, action[field]);
+        } else {
+          throw new Error(`Can not find field ${field} in ${action.type}`);
         }
+        match = /\$([a-zA-Z]+)/g.exec(prefix);
+      }
+      LOGGER.d(`reduce() prefix=`, prefix);
+      if (prefix) {
         let scopedState = get(state, prefix);
         scopedState = reducerFunction(scopedState, action);
-        set(state, prefix, scopedState);
-        return state;
+        return assign(state, prefix, scopedState);
+      } else {
+        return reducerFunction(state, action);
       }
-      return reducerFunction(state, action);
     });
     return descriptor;
   };
-};
-
-const set = (target: any, path: string, value: any) => {
-  return target;
 };
