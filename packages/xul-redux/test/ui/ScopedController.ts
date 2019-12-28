@@ -1,5 +1,5 @@
 import { singleton, singletons } from "@xul/core";
-import { litState } from "../../src/bindings/LitElementBindings";
+import { litState } from "../../src/bindings/LitState";
 import { LOGGER } from "../../src/Logger";
 import { action } from "../../src/ReduxActions";
 import { reduce } from "../../src/ReduxReducers";

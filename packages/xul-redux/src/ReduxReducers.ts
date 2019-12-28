@@ -1,8 +1,7 @@
-import { lowerFirst } from "@xul/core";
+import { assign, get, lowerFirst } from "@xul/core";
 import { LOGGER } from "./Logger";
 import { statePrefixes } from "./ReduxState";
 import { reduxStore } from "./ReduxStore";
-import { assign, get } from "./Utils";
 
 export interface IReducerOptions {
   type: string;

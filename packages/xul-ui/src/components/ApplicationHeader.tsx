@@ -1,8 +1,8 @@
 import { AppBar, Divider, Icon, IconButton, Tab, Tabs } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { CSSProperties } from "@material-ui/styles";
 import { reactState } from "@xul/redux";
-import React from "react";
+import React, { CSSProperties } from "react";
+import { drawerController } from "../controllers/DrawerController";
 import { ITabConfig, tabController } from "../controllers/TabController";
 @reactState()
 export class ApplicationHeader extends React.Component {
@@ -10,9 +10,10 @@ export class ApplicationHeader extends React.Component {
     const tabs: ITabConfig[] = tabController.getTabs();
     const selectTab = (e: any, value: number) => tabController.selectTab(value);
     const selectedTab = tabController.getSelectedTab();
+    const openDrawer = (e: any) => drawerController.openDrawer();
     return (
       <AppBar position="static" style={appBar}>
-        <IconButton color="inherit" aria-label="menu" style={smallButton}>
+        <IconButton color="inherit" aria-label="menu" style={compactButton} onClick={openDrawer}>
           <MenuIcon />
         </IconButton>
         <Divider orientation="vertical" />
@@ -26,7 +27,7 @@ export class ApplicationHeader extends React.Component {
   }
 }
 
-const smallButton: CSSProperties = {
+export const compactButton: CSSProperties = {
   padding: "8px"
 };
 const compact: CSSProperties = {

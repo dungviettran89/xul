@@ -1,9 +1,9 @@
 import { delay, postConstruct, singleton, singletons } from "@xul/core";
+import { assign, get } from "@xul/core";
 import { LOGGER } from "../Logger";
 import { action } from "../ReduxActions";
 import { reduce } from "../ReduxReducers";
 import { store } from "../ReduxStore";
-import { assign, get } from "../Utils";
 
 export interface IStateStore {
   prefix: string;

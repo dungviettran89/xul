@@ -1,6 +1,6 @@
+import { get } from "@xul/core";
 import { LOGGER } from "./Logger";
 import { store } from "./ReduxStore";
-import { get } from "./Utils";
 
 export interface IReduxOptions {
   prefix?: string;

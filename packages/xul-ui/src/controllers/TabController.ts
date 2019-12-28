@@ -1,5 +1,6 @@
 import { singleton, singletons } from "@xul/core";
-import { action, reactState, reduce, state } from "@xul/redux";
+import { action, reduce, state } from "@xul/redux";
+import { noopState } from "./NoopState";
 
 export interface ITabConfig {
   id: string;
@@ -9,7 +10,7 @@ export interface ITabConfig {
 }
 
 @singleton()
-@reactState(`session.tab`)
+@noopState(`session.tab`)
 export class TabController {
   @state("selectedTab")
   private selectedTab: string;
@@ -29,8 +30,10 @@ export class TabController {
 
   public getTabs(): ITabConfig[] {
     const home = { id: "home", name: "Home", type: "home", icon: "home" };
-    const agent = { id: "agent", name: "Agent", type: "agent", icon: "airplay" };
-    return [home, agent, ...this.tabs];
+    const agent = { id: "agent", name: "Agent", type: "agent", icon: "computer" };
+    const scenario = { id: "scenario", name: "Scenario", type: "scenario", icon: "book" };
+    const report = { id: "report", name: "Report", type: "report", icon: "assignment_turned_in" };
+    return [home, agent,scenario,report, ...this.tabs];
   }
 
   @action()
@@ -41,9 +44,7 @@ export class TabController {
 
   @reduce()
   public onSelectTab(s: any, { selectedTab }: { selectedTab: string }) {
-    const session = s.session || {};
-    const tab = session.tab || {};
-    return { ...s, session: { ...session, tab: { ...tab, selectedTab } } };
+    return { ...s, selectedTab };
   }
 }
 export const tabController: TabController = singletons.get(TabController);
