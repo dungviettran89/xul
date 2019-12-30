@@ -24,11 +24,12 @@ export class NodeService {
       .map(ni => ni.address)
       .filter(a => a !== "127.0.0.1" && a !== "::1")
       .pop();
-    const id: string = md5(`http://${address}:${this.applicationPort}`);
+    const port: number = this.applicationPort;  
+    const url: string = `http://${address}:${port}`;
+    const id: string = md5(url);
     const friendlyName: string = camelCase(name.findName());
-    const updated: number = Date.now();
-    const port: number = this.applicationPort;
-    Object.assign(this.current, { id, friendlyName, address, updated, port, status: "initializing" });
+    const updated: number = Date.now();    
+    Object.assign(this.current, { id, friendlyName, address, updated, port,url, status: "initializing" });
   }
 
   @postConstruct()

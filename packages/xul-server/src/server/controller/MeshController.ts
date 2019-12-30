@@ -35,7 +35,7 @@ export class MeshController {
           if (!target) {
             return defaultTarget;
           }
-          const targetPath = `http://${target.address}:${target.port}/${path}`;
+          const targetPath = `http://${target.url}/${path}`;
           LOGGER.info(`MessController.router() Forwarding ${request.url} to ${targetPath}`);
           return targetPath;
         },
