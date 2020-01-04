@@ -1,6 +1,6 @@
 #!/bin/bash
-export WIDTH=${WIDTH:-1400}
-export HEIGHT=${HEIGHT:-700}
+export WIDTH=${WIDTH:-1280}
+export HEIGHT=${HEIGHT:-720}
 export NOVNC_PORT=${NOVNC_PORT:-6080}
 export VNC_PORT=${VNC_PORT:-5900}
 export VNC_PASSWORD=${VNC_PASSWORD:-demo}

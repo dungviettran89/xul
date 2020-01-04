@@ -2,7 +2,7 @@ import { autowired, postConstruct, singleton } from "@xul/core";
 import { Application } from "express";
 import { IncomingMessage } from "http";
 import proxy from "http-proxy-middleware";
-import { LOGGER } from "../../server/Logger";
+import { LOGGER } from "../Logger";
 import { NodeService } from "../service/NodeService";
 
 @singleton()

@@ -25,5 +25,5 @@ export class AutomationNode {
   public address: string;
   public port: number;
   public updated: number;
-  public url:string;
+  public url: string;
 }

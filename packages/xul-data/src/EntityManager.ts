@@ -12,9 +12,11 @@ export class EntityManager {
   public async start() {
     LOGGER.info(`Starting Entity Manager.`);
     if (entitySchemas) {
-      for (const schema of entitySchemas.values()) {
-        LOGGER.info(`Executing ${schema}`);
-        await this.pool.query(schema);
+      for (const schemas of entitySchemas.values()) {
+        for (const schema of schemas.split(';').filter(Boolean)) {
+          LOGGER.info(`Executing ${schema}`);
+          await this.pool.query(schema);
+        }
       }
     }
   }

@@ -41,5 +41,6 @@
   },
   "devDependencies": {
     "cross-env": "^6.0.3"
-  }
+  },
+  "proxy": "https://xul-demo.cuatoi.us"
 }
