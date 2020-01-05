@@ -1,4 +1,4 @@
-import { singleton, singletons } from "@xul/core";
+import { singleton } from "@xul/core";
 import { action, noopState, reduce, state } from "@xul/redux";
 
 @singleton()
@@ -25,5 +25,3 @@ export class DrawerController {
     return { ...s, open };
   }
 }
-
-export const drawerController: DrawerController = singletons.get(DrawerController);

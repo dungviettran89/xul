@@ -1,18 +1,24 @@
 import { AppBar, Divider, Icon, IconButton, Tab, Tabs } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { autowired } from "@xul/core";
 import { reactState } from "@xul/redux";
 import React, { CSSProperties } from "react";
-import { drawerController } from "../controllers/DrawerController";
-import { ITabConfig, tabController } from "../controllers/TabController";
+import { DrawerController } from "../controllers/DrawerController";
+import { ITabConfig, TabController } from "../controllers/TabController";
 @reactState()
 export class ApplicationHeader extends React.Component {
+  @autowired()
+  public drawerController: DrawerController;
+  @autowired()
+  public tabController: TabController;
+
   public render() {
-    const tabs: ITabConfig[] = tabController.getTabs();
-    const selectTab = (e: any, value: number) => tabController.selectTab(value);
-    const selectedTab = tabController.getSelectedTab();
-    const openDrawer = (e: any) => drawerController.openDrawer();
+    const tabs: ITabConfig[] = this.tabController.getTabs();
+    const selectTab = (e: any, value: number) => this.tabController.selectTab(value);
+    const selectedTab = this.tabController.getIndex();
+    const openDrawer = (e: any) => this.drawerController.openDrawer();
     return (
-      <AppBar position="static" style={appBar}>
+      <AppBar position="fixed" style={appBar}>
         <IconButton color="inherit" aria-label="menu" style={compactButton} onClick={openDrawer}>
           <MenuIcon />
         </IconButton>

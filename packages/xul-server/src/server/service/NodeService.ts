@@ -51,6 +51,6 @@ export class NodeService {
   }
 
   private async updateActiveNode(): Promise<any> {
-    this.active = await this.entityManager.findBy(AutomationNode, " updated > ?", Date.now() - 2*60 * 1000);
+    this.active = await this.entityManager.findBy(AutomationNode, " updated > ?", Date.now() - 2 * 60 * 1000);
   }
 }

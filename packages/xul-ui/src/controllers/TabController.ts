@@ -8,16 +8,22 @@ export interface ITabConfig {
   icon?: any;
   default?: boolean;
 }
-
 @singleton()
 @noopState(`session.tab`)
 export class TabController {
+  public registry: Map<string, any> = new Map();
+
   @state("selectedTab")
   private selectedTab: string;
   @state("tabs", [])
   private tabs: ITabConfig[];
 
-  public getSelectedTab(id?: string): number {
+  public getTab(id?: string): ITabConfig | undefined {
+    id = id || this.selectedTab;
+    return this.getTabs().find(t => t.id === id);
+  }
+
+  public getIndex(id?: string): number {
     id = id || this.selectedTab;
     const tabs = this.getTabs();
     for (let i = 0; i < tabs.length; i++) {
@@ -30,7 +36,7 @@ export class TabController {
   public getDefaultTabs(): ITabConfig[] {
     return [
       { id: "home", name: "Home", type: "home", icon: "home" },
-      { id: "agent", name: "Agent", type: "agent", icon: "computer" },
+      { id: "agent", name: "Agent", type: "NodeTab", icon: "computer" },
       { id: "scenario", name: "Scenario", type: "scenario", icon: "book" },
       { id: "report", name: "Report", type: "report", icon: "assignment_turned_in" }
     ].map(t => ({ ...t, default: true }));
@@ -50,4 +56,9 @@ export class TabController {
     return { ...s, selectedTab };
   }
 }
-export const tabController: TabController = singletons.get(TabController);
+export const applicationTab = (name?: string) => {
+  return (clazz: any) => {
+    singletons.get(TabController).registry.set(name || clazz.name, clazz);
+    return clazz;
+  };
+};
