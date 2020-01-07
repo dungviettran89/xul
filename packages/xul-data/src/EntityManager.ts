@@ -13,7 +13,11 @@ export class EntityManager {
     LOGGER.info(`Starting Entity Manager.`);
     if (entitySchemas) {
       for (const schemas of entitySchemas.values()) {
-        for (const schema of schemas.split(";").filter(Boolean)) {
+        const statements = schemas
+          .split(";")
+          .filter(s => s.trim())
+          .filter(Boolean);
+        for (const schema of statements) {
           LOGGER.info(`Executing ${schema}`);
           await this.pool.query(schema);
         }
