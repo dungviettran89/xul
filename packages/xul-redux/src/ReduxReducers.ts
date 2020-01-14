@@ -4,15 +4,15 @@ import { statePrefixes } from "./ReduxState";
 import { reduxStore } from "./ReduxStore";
 
 export interface IReducerOptions {
-  type: string;
+  type?: string;
   prefix?: string;
   absolute?: boolean;
 }
 
 export const reduce = (typeOrOptions?: string | IReducerOptions) => {
   return (beanOrClass: any, name?: string, descriptor?: any) => {
-    let options: IReducerOptions = typeof typeOrOptions === "string" ? { type: typeOrOptions } : typeOrOptions;
-    options = options || { type: `${beanOrClass.constructor.name}.${lowerFirst(name.substr(2))}` };
+    const options: IReducerOptions = typeof typeOrOptions === "string" ? { type: typeOrOptions } : typeOrOptions || {};
+    options.type = options.type || `${beanOrClass.constructor.name}.${lowerFirst(name.substr(2))}`;
     LOGGER.d(`Mapped reducer of ${options.type} to method ${beanOrClass.constructor.name}.${name}(). options=`, options);
     const { type, absolute } = options;
     const reducerFunction = descriptor.value.bind(beanOrClass);

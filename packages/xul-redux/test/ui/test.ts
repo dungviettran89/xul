@@ -37,6 +37,8 @@ class TestComponent extends LitElement {
       <button @click=${e => testController.increaseHash(this.hashValue)}>Click me</button>
       <h2>Scoped Hash ${scopedController.value}</h2>
       <button @click=${e => scopedController.increase()}>Click me</button>
+      <h2>Scoped Absolute Hash ${scopedController.absoluteValue}</h2>
+      <button @click=${e => scopedController.increaseAbsolute()}>Click me</button>
     `;
   }
 }

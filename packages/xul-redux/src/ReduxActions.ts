@@ -3,7 +3,7 @@ import { LOGGER } from "./Logger";
 import { store } from "./ReduxStore";
 
 export interface IActionOptions {
-  type: string;
+  type?: string;
 }
 @singleton(`xul.redux.reduxActions`)
 export class ReduxActions {
@@ -17,8 +17,8 @@ export class ReduxActions {
 }
 export const action = (typeOrOptions?: string | IActionOptions) => {
   return (beanOrClass: any, name?: string, descriptor?: any) => {
-    let options: IActionOptions = typeof typeOrOptions === "string" ? { type: typeOrOptions } : typeOrOptions;
-    options = options || { type: `${beanOrClass.constructor.name}.${name}` };
+    const options: IActionOptions = typeof typeOrOptions === "string" ? { type: typeOrOptions } : typeOrOptions || {};
+    options.type = options.type || `${beanOrClass.constructor.name}.${name}`;
     LOGGER.d(`Mapped action ${options.type} to method ${beanOrClass.constructor.name}.${name}(). options=`, options);
     return {
       get() {

@@ -10,6 +10,8 @@ import { state } from "../../src/ReduxState";
 export class ScopedController {
   @state(`value`, 0)
   public value: number;
+  @state({ prefix: "local.prefixed.value", defaultValue: 0, absolute: true })
+  public absoluteValue: number;
 
   constructor() {
     LOGGER.d(`ScopedController created`);
@@ -19,10 +21,23 @@ export class ScopedController {
   public increase() {
     return { value: this.value + 1 };
   }
+
   @reduce()
   public onIncrease(s: any = {}, { value }: { value: number }) {
     LOGGER.d(`ScopedController.onIncrease`, s);
     return { ...s, value };
   }
+
+  @action()
+  public increaseAbsolute() {
+    return { value: this.absoluteValue + 1 };
+  }
+
+  @reduce({ absolute: true, prefix: "local.prefixed" })
+  public onIncreaseAbsolute(s: any = {}, { value }: { value: number }) {
+    LOGGER.d(`ScopedController.onIncreaseAbsolute`, s);
+    return { ...s, value };
+  }
 }
+
 export const scopedController: ScopedController = singletons.get(ScopedController);
