@@ -8,7 +8,7 @@ import { PageObjectModel } from "../../src/PageObjectModel";
 export class HomePage extends PageObjectModel {
   @given("Customer open home page")
   public async open() {
-    return await this.page.goto("http://demo-shop.janet-and-co.ga", { waitUntil: "networkidle2" });
+    return await this.page.goto("https://xul-demo-shop.cuatoi.us/index.php", { waitUntil: "networkidle2" });
   }
 
   @then("Popular products are displayed")

@@ -11,7 +11,7 @@ RUN mkdir -p /app/mariadb \
 
 ENV PS_INSTALL_AUTO=1 \
  PS_HANDLE_DYNAMIC_DOMAIN=0 \
- PS_DOMAIN=demo-shop.janet-and-co.ga\
+ PS_DOMAIN=xul-demo-shop.cuatoi.us \
  DB_SERVER=127.0.0.1 \
  DB_USER=root \
  DB_PASSWD=root \
