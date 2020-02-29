@@ -30,12 +30,16 @@ export class ScopedController {
 
   @action()
   public increaseAbsolute() {
-    return { value: this.absoluteValue + 1 };
+    let newValue = this.absoluteValue + 1;
+    if (isNaN(newValue)) {
+      newValue = 1;
+    }
+    return { value: newValue };
   }
 
   @reduce({ absolute: true, prefix: "local.prefixed" })
   public onIncreaseAbsolute(s: any = {}, { value }: { value: number }) {
-    LOGGER.d(`ScopedController.onIncreaseAbsolute`, s);
+    LOGGER.d(`ScopedController.onIncreaseAbsolute`, s, value);
     return { ...s, value };
   }
 }

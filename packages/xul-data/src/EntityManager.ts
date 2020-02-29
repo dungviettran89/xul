@@ -11,6 +11,7 @@ export class EntityManager {
   @postConstruct()
   public async start() {
     LOGGER.info(`Starting Entity Manager.`);
+    LOGGER.warn(`xul-data will be temporary depreciated in favor of sequelize. Expect a major change in API.`);
     if (entitySchemas) {
       for (const schemas of entitySchemas.values()) {
         const statements = schemas
