@@ -17,7 +17,7 @@ npm up
 npm run release:rc
 sleep 1m
 
-cd "$MAIN"/packages/xul-data
+cd "$MAIN"/packages/xul-express
 npm version "$BUILD_VERSION"
 rm -rf node_modules/ package-lock.json
 npm i
@@ -25,7 +25,7 @@ npm up
 npm run release:rc
 sleep 1m
 
-cd "$MAIN"/packages/xul-express
+cd "$MAIN"/packages/xul-data
 npm version "$BUILD_VERSION"
 rm -rf node_modules/ package-lock.json
 npm i
