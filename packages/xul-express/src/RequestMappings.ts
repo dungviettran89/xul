@@ -8,7 +8,7 @@ export class RequestMappings {
   private server: ExpressServer;
   private handlers: Map<any, IClassRequestMappingOption> = new Map();
 
-  @postConstruct(ExpressServer.ORDER - 1)
+  @postConstruct(ExpressServer.ORDER + 1)
   public onStart() {
     const application = this.server.application;
     this.handlers.forEach((classOption: IClassRequestMappingOption, clazz: any) => {
