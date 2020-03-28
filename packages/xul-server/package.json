@@ -1,22 +1,38 @@
 {
   "name": "@xul/server",
   "version": "0.0.1",
-  "description": "",
-  "main": "src/Index.js",
+  "description": "A test automation server",
+  "main": "./lib/Index.js",
+  "types": "./lib/Index.d.ts",
+  "bin": "./lib/Index.js",
   "scripts": {
-    "clean": "rimraf build",
+    "prebuild": "rimraf build",
     "build": "tsc",
     "start": "ts-node src/Index.ts",
-    "dev": "ts-node-dev --transpile-only src/Index.ts"
+    "dev": "ts-node-dev --transpile-only src/Index.ts",
+    "prepublishOnly": "npm run build",
+    "release:rc": "npm publish --tag=next --access public ",
+    "release": "npm publish --tag=latest --access public "
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dungviettran89/xul.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dungviettran89/xul/issues"
+  },
+  "homepage": "https://github.com/dungviettran89/xul#readme",
+  "keywords": [
+    "xul",
+    "automation",
+    "test"
+  ],
+  "author": "dungviettran89",
   "license": "ISC",
   "dependencies": {
     "@xul/core": "next",
     "@xul/data": "next",
     "@xul/express": "next",
-    "@xul/test": "next",
     "express": "^4.17.1",
     "globs": "^0.1.4",
     "http-proxy-middleware": "^0.20.0",
@@ -37,5 +53,11 @@
     "@types/node": "^12.12.19",
     "rimraf": "^3.0.0",
     "ts-node-dev": "^1.0.0-pre.44"
-  }
+  },
+  "files": [
+    "src/**",
+    "lib/**",
+    "package.json",
+    "package-lock.json"
+  ]
 }

@@ -25,6 +25,14 @@ npm up
 npm run release:rc
 sleep 1m
 
+cd "$MAIN"/packages/xul-redux
+npm version "$BUILD_VERSION"
+rm -rf node_modules/ package-lock.json
+npm i
+npm up
+npm run release:rc
+sleep 1m
+
 cd "$MAIN"/packages/xul-data
 npm version "$BUILD_VERSION"
 rm -rf node_modules/ package-lock.json
@@ -41,7 +49,7 @@ npm up
 npm run release:rc
 sleep 1m
 
-cd "$MAIN"/packages/xul-redux
+cd "$MAIN"/packages/xul-server
 npm version "$BUILD_VERSION"
 rm -rf node_modules/ package-lock.json
 npm i

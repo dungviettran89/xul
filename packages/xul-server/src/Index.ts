@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { xulApplication } from "@xul/express";
 
 @xulApplication()
