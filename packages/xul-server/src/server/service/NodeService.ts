@@ -1,19 +1,17 @@
 import { autowired, postConstruct, scheduled, singleton } from "@xul/core";
-import { EntityManager } from "@xul/data";
 import md5 from "md5";
 import os from "os";
 import { AutomationNode } from "../model/AutomationNode";
 
 @singleton()
 export class NodeService {
-  public current: AutomationNode = new AutomationNode();
+  public current: AutomationNode;
   public active: AutomationNode[] = [];
-  @autowired("xul.data.entityManager")
-  public entityManager: EntityManager;
   @autowired(`xul.express.port`)
   public applicationPort: number;
 
-  constructor() {
+  @postConstruct()
+  public async initialize(): Promise<any> {
     const networkInterfaces = os.networkInterfaces();
     const address: string = Object.keys(networkInterfaces)
       .map(i => networkInterfaces[i])
@@ -27,17 +25,13 @@ export class NodeService {
     const id: string = md5(url);
     const friendlyName: string = os.hostname();
     const updated: number = Date.now();
-    Object.assign(this.current, { id, friendlyName, address, updated, port, url, status: "initializing" });
-  }
-
-  @postConstruct()
-  public async initialize(): Promise<any> {
-    const oldNode: AutomationNode = await this.entityManager.findOne(AutomationNode, this.current.id);
-    if (oldNode) {
-      this.current.friendlyName = oldNode.friendlyName;
+    this.current = await AutomationNode.findOne({ where: { id } });
+    if (!this.current) {
+      this.current = await AutomationNode.create({ id, friendlyName, address, updated, port, url, status: "initializing" });
+    } else {
+      Object.assign(this.current, { id, friendlyName, address, updated, port, url, status: "initializing" });
+      this.current.save();
     }
-    await this.updateActiveNode();
-    return await this.entityManager.save(this.current);
   }
 
   @scheduled({ interval: 60000 })
@@ -46,11 +40,11 @@ export class NodeService {
       this.current.status = "ready";
     }
     this.current.updated = Date.now();
-    await this.entityManager.save(this.current);
+    this.current.save();
     return await this.updateActiveNode();
   }
 
-  private async updateActiveNode(): Promise<any> {
-    this.active = await this.entityManager.findBy(AutomationNode, " updated > ?", Date.now() - 2 * 60 * 1000);
+  private async updateActiveNode(): Promise<void> {
+    this.active = await AutomationNode.findAll();
   }
 }

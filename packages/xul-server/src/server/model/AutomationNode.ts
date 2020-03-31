@@ -1,24 +1,9 @@
-import { entity } from "@xul/data";
-import { id } from "@xul/data";
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "../config/DatabaseConfig";
 
 export type NodeStatus = "initializing" | "ready" | "busy";
 
-@entity({
-  schema: `
-CREATE TABLE IF NOT EXISTS automation_node (
-  id nvarchar(128) PRIMARY KEY,
-  friendlyName nvarchar(128) UNIQUE KEY,
-  status nvarchar(128) NOT NULL,
-  address nvarchar(128) NOT NULL,
-  url nvarchar(128) NOT NULL,
-  port int NOT NULL,
-  updated bigint NOT NULL
-)
-    `,
-  table: "automation_node"
-})
-export class AutomationNode {
-  @id()
+export class AutomationNode extends Model {
   public id: string;
   public friendlyName: string;
   public status: NodeStatus;
@@ -27,3 +12,20 @@ export class AutomationNode {
   public updated: number;
   public url: string;
 }
+
+AutomationNode.init(
+  {
+    id: {
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
+    friendlyName: DataTypes.STRING,
+    status: DataTypes.STRING,
+    address: DataTypes.STRING,
+    port: DataTypes.NUMBER,
+    updated: DataTypes.NUMBER,
+    url: DataTypes.STRING
+  },
+  { sequelize }
+);
+AutomationNode.sync({ alter: true });

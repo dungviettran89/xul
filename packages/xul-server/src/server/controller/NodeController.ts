@@ -1,15 +1,11 @@
 import { autowired, singleton } from "@xul/core";
-import { EntityManager } from "@xul/data";
 import { requestMapping } from "@xul/express";
 import { Request, Response } from "express";
-import { AutomationNode } from "../model/AutomationNode";
 import { NodeService } from "../service/NodeService";
 
 @singleton()
 @requestMapping("/api/node")
 export class NodeController {
-  @autowired("xul.data.entityManager")
-  public entityManager: EntityManager;
   @autowired()
   public nodeService: NodeService;
 
@@ -25,7 +21,7 @@ export class NodeController {
 
   @requestMapping()
   public async all(request: Request, response: Response): Promise<void> {
-    response.json(await this.entityManager.findAll(AutomationNode));
+    response.json(this.nodeService.active);
   }
 
   @requestMapping()
