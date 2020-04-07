@@ -34,7 +34,7 @@ export class NodeService {
     }
   }
 
-  @scheduled({ interval: 60000 })
+  @scheduled({ interval: 60000, timeout: 5000 })
   public async update(): Promise<any> {
     if (this.current.status === "initializing") {
       this.current.status = "ready";

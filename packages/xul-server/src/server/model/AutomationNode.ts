@@ -28,4 +28,3 @@ AutomationNode.init(
   },
   { sequelize }
 );
-AutomationNode.sync({ alter: true });
